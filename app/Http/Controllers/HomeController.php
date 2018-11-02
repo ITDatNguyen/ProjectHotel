@@ -40,6 +40,7 @@ class HomeController extends Controller
         if ($RoleId == 2) {
             return view('userDash', compact('UsersRole'));
         } else if ($RoleId == 4) {
+            // return view('adminM.master', compact('UsersRole'));
             return view('admin.adminDash', compact('UsersRole'));
         } else if ($RoleId == 1) {
             $PartnerHotels = $Partner->hotels->count();

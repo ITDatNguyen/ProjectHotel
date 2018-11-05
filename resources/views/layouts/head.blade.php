@@ -1,6 +1,4 @@
-<link type="text/css" rel="stylesheet" href="{{URL::asset('/css/homepage.css') }}"/>
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('/layouts/Utilities/Chico-effect.css') }}" />
-    <link rel="stylesheet" href="{{URL::asset('/layouts/Utilities/bootstrap-3.3.5-dist/css/bootstrap.min.css') }}">
+
     <script src="{{URL::asset('/layouts/Utilities/jQuery-1.x/jquery-1.11.3.min.js') }}"></script>
     <script src="{{URL::asset('/layouts/Utilities/bootstrap-3.3.5-dist/js/bootstrap.min.js') }}"></script>
     <link rel="stylesheet" type="text/css" media="all" href="{{URL::asset('/layouts/Utilities/autocomplete-suggestions/style.css') }}">
@@ -10,15 +8,27 @@
     {{-- notifation --}}
     <script
     src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script type="text/javascript" src="{{URL::asset('/datatable/js/dataTables.bootstrap4.js') }}"></script>
+    <script type="text/javascript" src="{{URL::asset('/datatable/js/jquery.dataTables.js') }}"></script>
+    <script type="text/javascript" src="{{URL::asset('/datatable/js/jquery-3.3.1.js') }}"></script>
+    
+    <!-- area css -->
+    <link type="text/css" rel="stylesheet" href="{{URL::asset('/css/homepage.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{URL::asset('/layouts/Utilities/Chico-effect.css') }}" />
+    <link rel="stylesheet" href="{{URL::asset('/layouts/Utilities/bootstrap-3.3.5-dist/css/bootstrap.min.css') }}">
     <link rel="stylesheet"
     href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
-    </head>
+
     <link rel="stylesheet" href="{{URL::asset('/css/flatpickr.min.css') }}">
     <link rel="stylesheet" href="{{URL::asset('/css/bootstrap-glyphicons.css') }}">
     <link rel="stylesheet" href="{{URL::asset('/css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{URL::asset('/css/dropzone.css') }}">
     <link rel="stylesheet" href="{{URL::asset('/css/slick.css') }}">
     <link rel="stylesheet" href="{{URL::asset('/css/animate.min.css') }}">
+    <!-- insert by dumvx -->
+    <link rel="stylesheet" href="{{URL::asset('datatable/css/jquery.dataTables.min.css') }}">
+    <link rel="stylesheet" href="{{URL::asset('datatable/css/dataTables.bootstrap4.css') }}">
+    <link rel="stylesheet" href="{{URL::asset('datatable/css/toastr.min.css') }}">
     <style>
         header{
             width: 100%;
@@ -131,3 +141,10 @@
         }, delay);
     });
 </script>
+
+    <script type="text/javascript" language="javascript" class="init">
+$(document).ready(function() {
+    $('#example').DataTable();
+} );
+
+    </script>

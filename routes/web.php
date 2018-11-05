@@ -105,3 +105,8 @@ Route::get('/reservations/{reservation}/pdf', 'ReservationController@pdfview');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+
+Route::get('/payment', function () {
+    return view('payments.payment');
+});

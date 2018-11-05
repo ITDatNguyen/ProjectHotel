@@ -45,7 +45,7 @@ class PartnerController extends Controller
         $Hotel = Hotel::find($HotelId);
         $Reservations = Reservation::where('hotel_id', '=', $HotelId)->get();
 
-        return view('partners.hotels.viewReservations', compact('Reservations', 'Hotel'));
+        return view('partners.hotels.Reservations', compact('Reservations', 'Hotel'));
 
     }
 }

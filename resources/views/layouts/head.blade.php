@@ -1,25 +1,25 @@
-<link type="text/css" rel="stylesheet" href="../css/homepage.css" />
-    <link rel="stylesheet" type="text/css" href="../layouts/Utilities/Chico-effect.css" />
-    <link rel="stylesheet" href="../layouts/Utilities/bootstrap-3.3.5-dist/css/bootstrap.min.css">
-    <script src="../layouts/Utilities/jQuery-1.x/jquery-1.11.3.min.js"></script>
-    <script src="../layouts/Utilities/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" media="all" href="../layouts/Utilities/autocomplete-suggestions/style.css">
-    <script type="text/javascript" src="../layouts/Utilities/autocomplete-suggestions/jquery.autocomplete.min.js"></script>
-    <script type="text/javascript" src="../layouts/Utilities/autocomplete-suggestions/locations-autocomplete.js"></script>
+<link type="text/css" rel="stylesheet" href="{{URL::asset('/css/homepage.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{URL::asset('/layouts/Utilities/Chico-effect.css') }}" />
+    <link rel="stylesheet" href="{{URL::asset('/layouts/Utilities/bootstrap-3.3.5-dist/css/bootstrap.min.css') }}">
+    <script src="{{URL::asset('/layouts/Utilities/jQuery-1.x/jquery-1.11.3.min.js') }}"></script>
+    <script src="{{URL::asset('/layouts/Utilities/bootstrap-3.3.5-dist/js/bootstrap.min.js') }}"></script>
+    <link rel="stylesheet" type="text/css" media="all" href="{{URL::asset('/layouts/Utilities/autocomplete-suggestions/style.css') }}">
+    <script type="text/javascript" src="{{URL::asset('/layouts/Utilities/autocomplete-suggestions/jquery.autocomplete.min.js') }}"></script>
+    <script type="text/javascript" src="{{URL::asset('/layouts/Utilities/autocomplete-suggestions/locations-autocomplete.js') }}"></script>
     <link href="{{ elixir('css/app.css')}}" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/flatpickr/dist/flatpickr.min.css">
-    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.2/css/bootstrap.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.css">
-    <link rel="stylesheet" href="https://unpkg.com/flatpickr/dist/flatpickr.min.css">
-    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.2/css/bootstrap.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+    {{-- notifation --}}
+    <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <link rel="stylesheet"
+    href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    </head>
+    <link rel="stylesheet" href="{{URL::asset('/css/flatpickr.min.css') }}">
+    <link rel="stylesheet" href="{{URL::asset('/css/bootstrap-glyphicons.css') }}">
+    <link rel="stylesheet" href="{{URL::asset('/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{URL::asset('/css/dropzone.css') }}">
+    <link rel="stylesheet" href="{{URL::asset('/css/slick.css') }}">
+    <link rel="stylesheet" href="{{URL::asset('/css/animate.min.css') }}">
     <style>
-
         header{
             width: 100%;
         }
@@ -115,6 +115,8 @@
         }
     </style>
     <script type="text/javascript" language="javascript">
+        toastr.options = {
+                "positionClass" : "toast-top-center"}
         $(document).ready(function(){
         var timer;
         var delay = 1000;

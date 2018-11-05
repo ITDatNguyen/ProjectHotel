@@ -1,5 +1,4 @@
-
-    <footer>
+<footer>
     <div class="container-fluid">
         <div id="left-footer">
             <a href="../Pages/homepage.html" style="color: #969595">

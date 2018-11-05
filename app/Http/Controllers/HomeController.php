@@ -35,7 +35,6 @@ class HomeController extends Controller
         $UsersRole = $CurrentUser->role;
         $Partner = $CurrentUser->partners;
         $RoleId = $UsersRole->id;
-
         //Depending on the Role Id different Dashboards are loaded.
         if ($RoleId == 2) {
             return view('userDash', compact('UsersRole'));
@@ -48,7 +47,6 @@ class HomeController extends Controller
         } else {
             return view('auth.login');
         }
-
     }
 
     //Updates a User Role to Partner if the Admin accepts the Partner Request.

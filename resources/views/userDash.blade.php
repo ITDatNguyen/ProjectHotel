@@ -6,7 +6,6 @@
         <div class="col-md-8 col-md-offset-2" style="margin-top: 69px;">
             <div class="panel panel-default" style="border-top-color: #e74c3c;">
                 <div class="panel-heading">Dashboard  |   You are logged in! {{$UsersRole->RoleName}}</div>
-
                 <div class="panel-body">
                   <div class="list-group">
                     <a href="/search" class="list-group-item">Make a Booking</a>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Blank Page</title>
+  <title>Admin</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   @include('adminM.head')
@@ -14,15 +14,12 @@
 
     @include('adminM.header')
   <!-- =============================================== -->
-    {{-- @include('adminM.leftmenu') --}}
-
+    @include('adminM.leftmenu')
   <!-- =============================================== -->
-
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    @yield('content')
-
+    
     <section class="content-header">
       <h1>
         Blank page
@@ -34,9 +31,8 @@
         <li class="active">Blank page</li>
       </ol>
     </section>
+    @yield('content')
   </div>
-  <!-- /.content-wrapper -->
-
   <footer class="main-footer">
     <div class="pull-right hidden-xs">
       <b>Version</b> 2.4.0
@@ -62,10 +58,8 @@
           <li>
             <a href="javascript:void(0)">
               <i class="menu-icon fa fa-birthday-cake bg-red"></i>
-
               <div class="menu-info">
                 <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
-
                 <p>Will be 23 on April 24th</p>
               </div>
             </a>

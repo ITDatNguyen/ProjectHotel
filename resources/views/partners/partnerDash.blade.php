@@ -12,7 +12,7 @@
                 <div class="panel-body">
                     <div class="list-group">
                       <a href="/partners/{{$Partner->id}}/yourhotels" class="list-group-item">Khách sạn của bạn</a>
-                      <a href="/partners/{{$Partner->id}}/newhotel" class="list-group-item">Liệt kê một khách sạn mới</a>
+                      <a href="/partners/{{$Partner->id}}/newhotel" class="list-group-item">Thêm một khách sạn mới</a>
                     @if ($PartnerHotels > 0)
                       <a href="/partners/{{$Partner->id}}/graphs" class="list-group-item">Xem thống kê khách sạn</a>
                     @endif

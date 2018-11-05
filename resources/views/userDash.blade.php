@@ -15,7 +15,6 @@
             <hr>
             <div class="panel panel-default">
                 <div class="panel-heading">Want to Partner with Check-in.com?</div>
-
                 <div class="panel-body">
                   <div class="list-group">
                     <a href="partner/apply" class="list-group-item">Become a Partner Now!</a>

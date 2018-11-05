@@ -103,20 +103,23 @@
                         <span>&nbsp;|&nbsp;</span>
                         <a href="{{ url('/login') }}" class="login" style="margin-right: 10px">ĐĂNG NHẬP</a>
                         @else
+                        Xin chào
                                 <div class="dropdown">
-                                    <span class="dropbtn" style="margin-left: 5px">{{ Auth::user()->name }}</span><span class="caret"></span>
+                                    <span class="dropbtn" style="margin-left: 5px"> {{ Auth::user()->name }}</span><span class="caret"></span>
                                     <div class="dropdown-content">
-                                        <div style="text-align: center;border-bottom: 1px solid #e74c3c">
-                                            <a href="{{ url('/logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                            </a>
-                                            <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                                                {{ csrf_field() }}
-                                            </form>
-                                        </div>
-                                        <a href="#">Profile</a>
+                                       
+                                        <a href="/profile" style="border-bottom: 1px solid #e74c3c">Thông tin </a>
+                                        <a href="/user/reservations" style="border-bottom: 1px solid #e74c3c">Xem đặt chỗ</a>
+                                        <div style="text-align: center">
+                                                <a href="{{ url('/logout') }}"
+                                                onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit();">
+                                                Đăng xuất
+                                                </a>
+                                                <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                                                    {{ csrf_field() }}
+                                                </form>
+                                            </div>
                                     </div>
                                 </div>
                         @endif

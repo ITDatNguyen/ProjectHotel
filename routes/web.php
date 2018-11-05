@@ -9,6 +9,10 @@ Route::get('/', function () {
     return view('search');
 })->name('HomePage');
 
+Route::get('/profile', function () {
+    return view('profile');
+});
+
 // Advanced Search
 Route::get('/search', function () {
     return view('search');

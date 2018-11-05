@@ -35,7 +35,7 @@ class ProposalController extends Controller
     {
 
         $Proposals = Proposal::all();
-        return view('admin.PartnerRequests', compact('Proposals'));
+        return view('adminM.PartnerRequests', compact('Proposals'));
     }
 
     // Removes the Proposal

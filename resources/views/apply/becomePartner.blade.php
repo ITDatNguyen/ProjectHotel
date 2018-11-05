@@ -41,7 +41,7 @@
   <div class="col-md-8 col-md-offset-2" style="margin-top: 69px;">
   <div class="panel panel-default" style="border-top-color: #e74c3c;">
     <p style="text-align: center;  margin: 5px;">
-      You already have a pending proposal.
+      Bạn đã có đề xuất đang chờ xử lý.
     </p>
   </div>
   </div>

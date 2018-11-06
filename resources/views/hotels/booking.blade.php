@@ -2,7 +2,7 @@
 
 @section('content')
   <div class="row">
-    <div class="col-md-8 col-md-offset-2">
+    <div class="col-md-8 col-md-offset-2" style="margin-top: 69px">
       <div class="page-header">
           <h1>Check-In: <small>Make a Booking</small></h1>
 
@@ -51,10 +51,10 @@
            <b>Max Occupents:</b><p>{{$room->Capacity}} people. </p>
            <b>Beds Provided:</b><p> {{$room->BedOption}}.</p>
            <b>Room View:</b><p> {{$room->View}}.</p>
-           <b>Price Per Night:</b><p> £{{$room->Price}}.</p>
+           <b>Price Per Night:</b><p> vnd{{$room->Price}}.</p>
 
-           <p> £{{$room->Price}} x {{$StayDuration}} Nights </p>
-           <b class="lead">Total Price: <u>£{{$TotalCost}}</u></b>
+           <p> vnd{{$room->Price}} x {{$StayDuration}} Nights </p>
+           <b class="lead">Total Price: <u>vnd{{$TotalCost}}</u></b>
       </center>
 
       <br />

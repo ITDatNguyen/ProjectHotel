@@ -19,6 +19,9 @@
     <link rel="stylesheet" href="{{URL::asset('/css/dropzone.css') }}">
     <link rel="stylesheet" href="{{URL::asset('/css/slick.css') }}">
     <link rel="stylesheet" href="{{URL::asset('/css/animate.min.css') }}">
+    {{--slick--}}
+    <link rel="stylesheet" type="text/css" href="{{URL::asset('/engine1/style.css') }}" />
+	<script type="text/javascript" src="{{URL::asset('/engine1/jquery.js') }}"></script>
     <style>
         header{
             width: 100%;

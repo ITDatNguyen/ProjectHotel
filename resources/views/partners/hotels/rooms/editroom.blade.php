@@ -36,7 +36,7 @@
     </div>
 
     <div class="form-group">
-      <label for="pricebox" class="col-2 col-form-label">Giá: (£)</label>
+      <label for="pricebox" class="col-2 col-form-label">Giá: (vnd)</label>
       <div class="col-10">
 
         <input class="form-control" name="Price" type="text" value="{{$room->Price}}" id="pricebox">

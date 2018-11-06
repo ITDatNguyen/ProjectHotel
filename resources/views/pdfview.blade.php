@@ -47,7 +47,7 @@
                     <p><b>Room Name:</b> {{$showdetails->room->RoomType}}</p>
                     <p><b>Beds Provided:</b> {{$showdetails->room->BedOption}}</p>
                     <p><b>Room View:</b> {{$showdetails->room->View}}</p>
-                    <p><b>Total Price:</b> £{{$showdetails->totalPrice}}</p>
+                    <p><b>Total Price:</b> vnd{{$showdetails->totalPrice}}</p>
                 </div>
             </div>
               <!-- Uses the City that the hotel is located in to pull a map from Google-->

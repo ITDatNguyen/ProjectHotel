@@ -15,7 +15,7 @@
           <p><mark>Guest Name :</mark>  {{$Reservation->guestFirstName}} {{$Reservation->guestlastName}}.  </p>
           <p><mark>Check-in Date :</mark> {{$Reservation->CheckIn}}.  </p>
           <p><mark>Check-out Date:</mark> {{$Reservation->CheckOut}}.  </p>
-          <p><mark>Total Price :</mark> £{{$Reservation->totalPrice}}.  </p>
+          <p><mark>Total Price :</mark> vnd{{$Reservation->totalPrice}}.  </p>
           <hr />
         @endforeach
     </div>

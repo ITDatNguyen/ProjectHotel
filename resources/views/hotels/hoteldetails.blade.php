@@ -53,7 +53,7 @@
           <h3 class="panel-title">Chi tiết khách sạn:</h3>
         </div>
         <div class="panel panel-body">
-            <dl class="row">
+            <dl class="row" style="font-size: 15px;">
                 <dt class="col-sm-5">Đánh giá người dùng đặt phòng:</dt>
                   <dd class="col-sm-7">
                       <img src="{{$starPath}}" />

@@ -25,10 +25,16 @@
     <link rel="stylesheet" href="{{URL::asset('/css/dropzone.css') }}">
     <link rel="stylesheet" href="{{URL::asset('/css/slick.css') }}">
     <link rel="stylesheet" href="{{URL::asset('/css/animate.min.css') }}">
+<<<<<<< HEAD
     <!-- insert by dumvx -->
     <link rel="stylesheet" href="{{URL::asset('datatable/css/jquery.dataTables.min.css') }}">
     <link rel="stylesheet" href="{{URL::asset('datatable/css/dataTables.bootstrap4.css') }}">
     <link rel="stylesheet" href="{{URL::asset('datatable/css/toastr.min.css') }}">
+=======
+    {{--slick--}}
+    <link rel="stylesheet" type="text/css" href="{{URL::asset('/engine1/style.css') }}" />
+	<script type="text/javascript" src="{{URL::asset('/engine1/jquery.js') }}"></script>
+>>>>>>> fc299f48d6b652bbf0311c6ff9e8221951a99a71
     <style>
         header{
             width: 100%;

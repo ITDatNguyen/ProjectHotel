@@ -42,12 +42,12 @@
                 <div class="panel-body">
 
                    <p><b>Reference Number: </b>{{$showdetails->id}}</p>
-                    <p><b>Guest Name:</b>{{$showdetails->guestFirstName}} {{$showdetails->guestlastName}}</p>
+                    <p><b>Tên khách:</b>{{$showdetails->guestFirstName}} {{$showdetails->guestlastName}}</p>
                     <p><b>Check In Date:  </b>{{$showdetails->CheckIn}}  / <b>Check Out Date:  </b>  {{$showdetails->CheckOut}}</p>
                     <p><b>Room Name:</b> {{$showdetails->room->RoomType}}</p>
                     <p><b>Beds Provided:</b> {{$showdetails->room->BedOption}}</p>
                     <p><b>Room View:</b> {{$showdetails->room->View}}</p>
-                    <p><b>Total Price:</b> £{{$showdetails->totalPrice}}</p>
+                    <p><b>Tổng giá:</b>{{$showdetails->totalPrice}} vnd</p>
                 </div>
             </div>
               <!-- Uses the City that the hotel is located in to pull a map from Google-->

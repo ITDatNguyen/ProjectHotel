@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title >DTDL | hotel-Booking</title>
-    <link rel="icon" href="../img/img/logo.png" />
+    <link href="{{URL::asset('/img/img/logo.png')}}" />
     <style>
         header{
             position: fixed;
@@ -25,7 +25,9 @@
         ]); ?>
     </script>
 </head>
-<body>
+<body style="background-color: #e6eaed!important;
+    font-family: MuseoSans,sans-serif;
+">
     @yield('css')
     @include('layouts.head')
     @include('layouts.header')

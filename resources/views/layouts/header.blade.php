@@ -14,6 +14,7 @@
 }
 
 .dropdown-content {
+    font-size: 12px;
     display: none;
     position: absolute;
     background-color: #bdc3c7;
@@ -107,9 +108,16 @@
                                 <div class="dropdown">
                                     <span class="dropbtn" style="margin-left: 5px"> {{ Auth::user()->name }}</span><span class="caret"></span>
                                     <div class="dropdown-content">
-                                       
                                         <a href="/profile" style="border-bottom: 1px solid #e74c3c">Thông tin </a>
-                                        <a href="/user/reservations" style="border-bottom: 1px solid #e74c3c">Xem đặt chỗ</a>
+                                        @if(Auth::user()->role_id == '2')
+                                            <a href="/user/reservations" style="border-bottom: 1px solid #e74c3c">Xem đặt chỗ</a>
+                                        @endif
+                                        @if(Auth::user()->role_id == '4')
+                                            <a href="/home" style="border-bottom: 1px solid #e74c3c">Quản lý</a>
+                                        @endif
+                                        @if(Auth::user()->role_id == '1')
+                                            <a href="/home" style="border-bottom: 1px solid #e74c3c">Quản lý khách sạn</a>
+                                        @endif
                                         <div style="text-align: center">
                                                 <a href="{{ url('/logout') }}"
                                                 onclick="event.preventDefault();

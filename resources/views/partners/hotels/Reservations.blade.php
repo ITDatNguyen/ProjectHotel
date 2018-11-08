@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<div style="margin-top:69px"> 
+
   <a class="btn btn-default pull-right" href="/yourhotels/{{$Hotel->id}}/dashboard">Back</a>
 
   <div class="row">
@@ -12,7 +12,7 @@
 
         <br />
 
-  <table id="example" class="table table-striped table-bordered" style="width:100%">
+  <table id="example" class="table table-striped table-bordered" style="margin-top:100px">
   <thead>
                     <tr>
                         <th>Tên Phòng</th>
@@ -20,10 +20,30 @@
                         <th>Ngày Nhận Phòng</th>
                         <th>Ngày Trả Phòng</th>
                         <th>Tổng Tiền</th>
+                        <th>Hành Động</th>
                     </tr>
                 </thead>
+                @foreach ($Reservations  as $Reservation)
+                <tbody>
+                    <tr>
+                        <td>{{$Reservation->room->RoomType}}</td>
+                        <td>{{$Reservation->guestFirstName}} {{$Reservation->guestlastName}}</td>
+                        <td>{{$Reservation->CheckIn}}</td>
+                        <td>{{$Reservation->CheckOut}}</td>
+                        <td>{{$Reservation->totalPrice}}</td>
+                        <td><a class="btn btn-sm btn-danger pull-right" href="/reservations/{{$Reservation->id}}/cancel">Cancel</a></td>
+                    </tr>
+                </tbody>
+                @endforeach
+
+
 </table>
     </div>
 </div>
-</div>
+<script type="text/javascript" language="javascript" class="init">
+$(document).ready(function() {
+    $('#example').DataTable();
+} );
+
+    </script>
 @endsection

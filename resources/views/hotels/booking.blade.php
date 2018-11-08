@@ -84,18 +84,8 @@
           </div>
 
           <hr />
-          <!-- <button type="submit" class="btn btn-success">Book Now!</button> -->
-          <form action="your-server-side-code" method="POST">
-  <script
-    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-    data-key="pk_test_ItuZYuR5FyuPR4aFtaEFKlmh"
-    data-amount="999"
-    data-name="Demo Site"
-    data-description="Example charge"
-    data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-    data-locale="auto">
-  </script>
-</form>
+          <button type="submit" class="btn btn-success">Book Now!</button>
+          
        </center>
 
      </form>

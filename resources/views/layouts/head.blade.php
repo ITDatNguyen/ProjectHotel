@@ -142,9 +142,4 @@
     });
 </script>
 
-    <script type="text/javascript" language="javascript" class="init">
-$(document).ready(function() {
-    $('#example').DataTable();
-} );
-
-    </script>
+    

@@ -13,6 +13,9 @@ Route::get('/profile', function () {
     return view('profile');
 });
 
+Route::get('hotel/location=hải+châu','HotelsController@countyhc');
+Route::get('hotel/location=sơn+trà','HotelsController@countyst');
+Route::get('hotel/location=hòa+khánh','HotelsController@countyhk');
 // Advanced Search
 Route::get('/search', function () {
     return view('search');

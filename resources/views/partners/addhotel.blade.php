@@ -21,6 +21,12 @@
         </div>
       </div>
       <div class="form-group">
+          <label for="Countybox" class="col-2 col-form-label">Quận :</label>
+        <div class="col-8">
+          <input class="form-control" name="County" type="text" value="" id="Countybox">
+        </div>
+      </div>
+      <div class="form-group">
           <label for="Citybox" class="col-2 col-form-label">Thành phố :</label>
         <div class="col-8">
           <input class="form-control" name="City" type="text" value="" id="Citybox">

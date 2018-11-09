@@ -3,7 +3,7 @@
   <div class="row">
       <div class="col-md-8 col-md-offset-2" style="margin-top: 69px;">
           <div class="panel panel-default" style="border-top-color: #e74c3c;">
-              <div class="panel-heading">Tìm nhà của bạn, xa nhà</div>
+              <div class="panel-heading">Khách Sạn</div>
               <div class="panel-body">
     <!-- Displays Each Hotel as a "Card" and a button to visit the hotels page. -->
     @foreach ($Hotels as $Hotel)

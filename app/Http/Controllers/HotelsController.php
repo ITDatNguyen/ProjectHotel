@@ -18,7 +18,6 @@ class HotelsController extends Controller
         // Gets the search term and Number of travelers.
         $Searchterm = $request->get('searchterm');
         $NumTravelers = $request->get('numtravelers');
-
         /* Attempts different combinations to see the Search specifics provided and finds
         the correct hotels from these specifics.    */
         if (empty($Searchterm) && empty($NumTravelers)) {
@@ -30,6 +29,7 @@ class HotelsController extends Controller
                 ->orwhere('City', 'LIKE', '%' . $Searchterm . '%')
                 ->orwhere('Country', 'LIKE', '%' . $Searchterm . '%')
                 ->orwhere('Address', 'LIKE', '%' . $Searchterm . '%')
+                ->orwhere('County', 'LIKE', '%' . $Searchterm . '%')
                 ->get();
         } else if (empty($Searchterm) && !empty($NumTravelers)) {
 
@@ -46,12 +46,13 @@ class HotelsController extends Controller
                 $q2->where('Name', 'LIKE', '%' . $Searchterm . '%')
                     ->orwhere('City', 'LIKE', '%' . $Searchterm . '%')
                     ->orwhere('Country', 'LIKE', '%' . $Searchterm . '%')
-                    ->orwhere('Address', 'LIKE', '%' . $Searchterm . '%');
+                    ->orwhere('Address', 'LIKE', '%' . $Searchterm . '%')
+                    ->orwhere('County', 'LIKE', '%' . $Searchterm . '%');
 
             })->get();
 
         }
-
+       
         // Splits the Date range and puts Check In and Check out into Session Variables.
         $Hotels->load('thumbnail');
         $Range = explode('to', $request->daterange);
@@ -173,6 +174,7 @@ class HotelsController extends Controller
         $Hotel = new Hotel;
         $Hotel->Name = $request->Name;
         $Hotel->Address = $request->Address;
+        $Hotel->County = $request->County;
         $Hotel->City = $request->City;
         $Hotel->Country = $request->Country;
         $Hotel->TelephoneNumber = $request->TelephoneNumber;
@@ -251,6 +253,33 @@ class HotelsController extends Controller
         $CurrentHotel->rooms()->delete();
         $CurrentHotel->delete();
         return redirect('/home');
+
+    }
+
+    public function countyhc(Request $request)
+    {
+    
+            $Hotels = Hotel::where('County','Hải Châu')
+            ->get();          
+        return view('hotels.allhotels', compact('Hotels'));
+
+    }
+    public function countyst(Request $request)
+    {
+    
+            $Hotels = Hotel::where('County','Sơn Trà')
+            ->get();        
+
+        return view('hotels.allhotels', compact('Hotels'));
+
+    }
+    public function countyhk(Request $request)
+    {
+    
+            $Hotels = Hotel::where('County','Hòa Khánh')
+            ->get();        
+
+        return view('hotels.allhotels', compact('Hotels'));
 
     }
 

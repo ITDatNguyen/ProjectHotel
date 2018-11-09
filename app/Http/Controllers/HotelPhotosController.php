@@ -20,7 +20,7 @@ class HotelPhotosController extends Controller
     public function addphoto(Request $request, Hotel $hotel)
     {
         $File = $request->file('file');
-        $Name = time() . $File->getClientOriginalName() . "dat";
+        $Name = time() . $File->getClientOriginalName();
         $File->move('hotelphotos/photos', $Name);
         $hotel->photos()->create(['path' => "/hotelphotos/photos/{$Name}"]);
     }

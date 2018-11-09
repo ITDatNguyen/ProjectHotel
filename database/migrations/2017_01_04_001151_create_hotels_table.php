@@ -17,6 +17,7 @@ class CreateHotelsTable extends Migration
             $table->increments('id');
             $table->string('Name');
             $table->string('Address');
+            $table->string('County');
             $table->string('City');
             $table->string('Country');
             $table->string('TelephoneNumber');

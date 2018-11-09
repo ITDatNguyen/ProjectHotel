@@ -14,6 +14,7 @@
 }
 
 .dropdown-content {
+    font-size: 12px;
     display: none;
     position: absolute;
     background-color: #bdc3c7;
@@ -113,6 +114,9 @@
                                         @endif
                                         @if(Auth::user()->role_id == '4')
                                             <a href="/home" style="border-bottom: 1px solid #e74c3c">Quản lý</a>
+                                        @endif
+                                        @if(Auth::user()->role_id == '1')
+                                            <a href="/home" style="border-bottom: 1px solid #e74c3c">Quản lý khách sạn</a>
                                         @endif
                                         <div style="text-align: center">
                                                 <a href="{{ url('/logout') }}"

@@ -1,13 +1,20 @@
 <style>
-.text{
-  margin: 0px 0px 8px 1px
-}
-#star{
-  padding-top: 16px;
-}
-.panel-body .text{
-  font-size: 14px;color: #8f8f8f;font-weight: 500;line-height: 14px;text-transform: capitalize;
-}
+  .text {
+    margin: 0px 0px 8px 1px
+  }
+
+  #star {
+    padding-top: 16px;
+  }
+
+  .panel-body .text {
+    font-size: 14px;
+    color: #8f8f8f;
+    font-weight: 500;
+    line-height: 14px;
+    text-transform: capitalize;
+  }
+
 </style>
 @extends('layouts.app') 
 @section('content')
@@ -159,4 +166,19 @@
 </div>
 <script type="text/javascript" src="{{URL::asset('engine1/wowslider.js') }}"></script>
 <script type="text/javascript" src="{{URL::asset('engine1/script.js') }}"></script>
+<script src="/js/bootstrap-rating.js" type="text/javascript"></script>
+<script>
+  $('.autoplay').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 2500,
+        arrows:false,
+        infinite: true,
+        speed: 500,
+        fade: true,
+        cssEase: 'linear'
+
+      });
+</script>
 @endsection

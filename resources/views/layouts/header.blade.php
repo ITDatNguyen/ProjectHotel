@@ -56,7 +56,7 @@
 <header>
     <div class="container-fluid" style="font-size: 13px;" >
         <div id="left-header" >
-            <a href="#booking" target="_self" title="Về trang chủ">
+            <a href="{{URL::asset('/')}}" target="_self" title="Về trang chủ">
                 <img class="animated bounce" src="{{URL::asset('/img/img/logo.png')}}" width="110px" height="64px"/> <span href={{url('/')}}>Mạng đặt phòng khách sạn Online</span>
             </a>
         </div>
@@ -69,10 +69,10 @@
                 </a>
             </div>
             <div style="float: left; border-right: solid thin rgb(238,238,238); margin: 0px 5px 0px 5px">
-                <a href="#footer">Contact</a></li>
+                <a href="{{URL::asset('#footer')}}" style="margin-right: 5px">Liên Hệ</a></li>
             </div>
             <div style="float: left; border-right: solid thin rgb(238,238,238)">
-                <a href="#promotion">Khuyến Mãi</a></li>
+                <a href="#promotion" style="margin-right: 5px">Khuyến Mãi</a></li>
             </div>
             <div id="welcome" style="padding-left: 10px">
                 <i class="material-icons" style="float: left; margin-top: 15px; font-size: 30px">

@@ -63,9 +63,8 @@ class ReservationController extends Controller
         $reservation->checkOut = $sec;
         $reservation->totalPrice = $totalcost;
         $user->addReservation($reservation);
-
-        return redirect('/home');
-
+        $tien =$reservation->totalPrice;
+        return view('hotels.paypal', compact('tien'));
     }
     public function show(User $user, Reservation $reservation)
     {
@@ -105,5 +104,18 @@ class ReservationController extends Controller
 
         //  return view('pdfview',compact('reservation','hotel','hotelphoto'));
 
+    }
+
+    public function storePayment(Request $request,$tien)
+    {
+        \Stripe\Stripe::setApiKey("sk_test_AjKoauWz7orJbCOdHku4OFO9");
+        $token = $_POST['stripeToken'];
+        $charge = \Stripe\Charge::create([
+            'amount' =>$tien,
+            'currency' => 'usd',
+            'description' => 'Example charge',
+            'source' => $token,
+        ]);
+        return view('hotels.payment');
     }
 }

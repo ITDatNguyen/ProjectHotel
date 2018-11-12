@@ -91,7 +91,7 @@
                 </div>
 
                 <hr />
-                <button type="submit" class="btn btn-success">Book Now!</button>
+                <button type="/payment" class="btn btn-success">Đặt ngay!</button>
             </center>
 
         </form>

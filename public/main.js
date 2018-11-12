@@ -10,7 +10,7 @@ $(function() {
             target.attr('tabindex', '-1');
             target.focus();
             });
-        location.hash = target;
+        // location.hash = target;
         return false;
         }
         }

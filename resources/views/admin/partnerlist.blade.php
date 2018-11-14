@@ -3,9 +3,9 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <h3 class="text-center">All Partners</h3>
+            <div class="col-md-8 col-md-offset-2" style="margin-top: 69px;">
+                    <div class="panel panel-default" style="border-top-color: #e74c3c;">
+                <div class="panel-heading">Tất cả đối tác with OYO.com</div>
                 <!-- Displays a list of all the partners of Check-In.com and displays a Remove Button next to each -->
                     @foreach ($Partners as $Partner)
                       <li class="list-group-item text-center">

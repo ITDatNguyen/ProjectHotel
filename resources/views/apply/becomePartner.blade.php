@@ -1,59 +1,49 @@
 @extends('layouts.app')
 @section('content')
-    <!-- Checks to see if a User already has a proposal
-        If the user doesnt have a proposal , a form is displayed. -->
 @if (is_null($User->proposals))
-  <h3>Partner with Check-In.com</h3>
+<div class="row">
+    <div class="col-md-8 col-md-offset-2" style="margin-top: 69px;">
+        <div class="panel panel-default" style="border-top-color: #e74c3c;">
+            <div class="panel-heading">Đối tác with OYO.com</div>
+            <div class="panel-body">
     <form method="POST" action="/proposal/{{$User->id}}/new">
       {{ csrf_field()}}
-
-      <div class="form-group row">
-        <label for="namebox" class="col-2 col-form-label">Company Name:</label>
+        <label for="namebox" class="col-2 col-form-label">Tên công ty:</label>
           <div class="col-10">
-
               <input class="form-control" name="CompanyName" type="text" value="" id="namebox">
-
           </div>
-      </div>
 
-      <div class="form-group row">
-        <label for="emailbox" class="col-2 col-form-label">Company Email:</label>
+        <label for="emailbox" class="col-2 col-form-label">Email:</label>
             <div class="col-10">
-
                <input class="form-control" name="CompanyEmail" type="text" value="" id="emailbox">
-
             </div>
-      </div>
 
-      <div class="form-group row">
-        <label for="Addressbox" class="col-2 col-form-label">Company HQ Address:</label>
+        <label for="Addressbox" class="col-2 col-form-label">Địa chỉ:</label>
            <div class="col-10">
 
               <input class="form-control" name="HQAddress" type="text" value="" id="Addressbox">
           </div>
-      </div>
 
-      <div class="form-group row">
-        <label for="Descbox" class="col-2 col-form-label">Your Vision:</label>
+        <label for="Descbox" class="col-2 col-form-label">Mô tả:</label>
            <div class="col-10">
 
-              <textarea class="form-control" name="Vision" type="text" value="" id="Descbox"></textarea>
+              <textarea class="form-control" rows="4" name="Vision" type="text" value="" id="Descbox"></textarea>
           </div>
-      </div>
 
-      <button type="submit" class="btn btn-primary">Join</button>
+      <button type="submit" style="margin-top: 7px" class="btn btn-primary">Đăng ký</button>
   </form>
-
+  
+</div>
+        </div>
+        </div>
 <!-- If the User does have a Proposal -->
 @else
-  <p>
-    You already have a pending proposal.
-  </p>
-
+  <div class="col-md-8 col-md-offset-2" style="margin-top: 69px;">
+  <div class="panel panel-default" style="border-top-color: #e74c3c;">
+    <p style="text-align: center;  margin: 5px;">
+      Bạn đã có đề xuất đang chờ xử lý.
+    </p>
+  </div>
+  </div>
 @endif
-
-
-
-
-
 @endsection

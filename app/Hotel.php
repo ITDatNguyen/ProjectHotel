@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Hotel extends Model
 {
-  protected $fillable = ['Name','Address','City','Country','TelephoneNumber','description','ImagePath'];
+  protected $fillable = ['Name','Address','County','City','Country','TelephoneNumber','description','ImagePath'];
 
   // A Hotel Belongs to a Partner .
   public function partner() {

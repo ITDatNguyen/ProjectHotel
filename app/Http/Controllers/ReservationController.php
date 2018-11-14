@@ -9,6 +9,8 @@ use App\User;
 use Auth;
 use Crypt;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use Mail;
 use PDF;
 
 class ReservationController extends Controller
@@ -43,17 +45,16 @@ class ReservationController extends Controller
             return redirect('/login');
         }
     }
-    public function store(User $user, Hotel $hotel, Room $room, Request $request, Reservation $reservation, $first, $sec, $protectedCost)
+    public function store(Hotel $hotel, Room $room, Request $request, Reservation $reservation, $first, $sec, $protectedCost)
     {
-
         $uid = Auth::id();
         $user = User::find($uid);
+        $email = $user->email;
         $hotel = $room->hotel;
         $hotelid = $hotel->id;
         $firstname = $request->firstname;
         $lastname = $request->lastname;
         $totalcost = Crypt::decrypt($protectedCost);
-
         $reservation = new Reservation;
         $reservation->hotel_id = $hotelid;
         $reservation->room_id = $room->id;
@@ -63,47 +64,59 @@ class ReservationController extends Controller
         $reservation->checkOut = $sec;
         $reservation->totalPrice = $totalcost;
         $user->addReservation($reservation);
-
-        return redirect('/home');
-
+        $tien = $reservation->totalPrice;
+        return view('hotels.paypal', compact('tien','email','hotel'));
     }
     public function show(User $user, Reservation $reservation)
     {
-
         $uid = Auth::id();
         $user = User::find($uid);
+        $email = $user->email;
         $reservations = $user->reservations->sortBy('CheckIn');
-
         return view('myreservations', compact('reservations'));
-
     }
     public function destroy(Reservation $reservation)
     {
-
         $id = $reservation->id;
         $reservation = Reservation::find($id);
-
         $reservation->delete();
         return back();
-
     }
 
     public function pdfview(Request $request, Reservation $reservation)
     {
-
         $uid = Auth::id();
         $id = $reservation->id;
         $room = $reservation->room;
         $hotel = $room->hotel;
         $hotelphoto = $hotel->photos->first();
         $reservation = Reservation::where('id', '=', $id)->with('room')->get();
-
-        $imagepath = "https://maps.googleapis.com/maps/api/staticmap?size=680x400&zoom=14&center=leeds&style=feature:all|element:all";
-
-        $pdf = PDF::loadview('pdfview', compact('reservation', 'hotel', 'hotelphoto', 'imagepath'));
-        return $pdf->stream('pdfview.pdf');
-
-        //  return view('pdfview',compact('reservation','hotel','hotelphoto'));
-
+        // $pdf = PDF::loadview('pdfview', compact('reservation', 'hotel', 'hotelphoto'));
+        // return $pdf->stream('pdfview.pdf');
+         return view('pdfview',compact('reservation','hotel','hotelphoto'));
     }
+
+    public function storePayment(Request $request)
+    {
+        
+        $pay = $request->money;
+        $email = $request->emailuser;
+        $hotel = $request->infor;
+        Mail::send('mailfb', array("name"=>'',"email"=>'',"content"=>'Bạn đã đặt phòng tại khách sạn 
+            chi tiết xem tại website
+        '), function($message) use($email){
+            $message->to($email)->subject('Thông báo đặt phòng!')->from('hotelbookingdanang@gmail.com', 'OYO.com')
+            ->sender('hotelbookingdanang@gmail.com', 'OYO.com');
+        });
+        \Stripe\Stripe::setApiKey("sk_test_AjKoauWz7orJbCOdHku4OFO9");
+        $token = $_POST['stripeToken'];
+        $charge = \Stripe\Charge::create([
+            'amount' =>strrev($pay),
+            'currency' => 'usd',
+            'description' => 'Example charge',
+            'source' => $token,
+        ]);
+        return view('hotels.payment');
+    }
+    
 }

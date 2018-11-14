@@ -11,12 +11,9 @@ class PartnerController extends Controller
 {
     public function index()
     {
-
         // Displays the Partners List for the Admin.
         $Partners = Partner::all();
-
-        return view('admin.partnerlist', compact('Partners'));
-
+        return view('adminM.ListPartner', compact('Partners'));
     }
     //Downgrades A partner which has been selected by Admin to a normal User.
     public function remove(Partner $partner, User $user)

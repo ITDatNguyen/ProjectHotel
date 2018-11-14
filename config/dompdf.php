@@ -83,7 +83,7 @@ return array(
          * document must be present in your fonts, however.
          */
         "DOMPDF_UNICODE_ENABLED" => true,
-
+        "enable_html5_parser" => true,
         /**
          * Whether to enable font subsetting or not.
          */

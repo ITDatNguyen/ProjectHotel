@@ -35,21 +35,20 @@ class HomeController extends Controller
         $UsersRole = $CurrentUser->role;
         $Partner = $CurrentUser->partners;
         $RoleId = $UsersRole->id;
-
         //Depending on the Role Id different Dashboards are loaded.
         if ($RoleId == 2) {
-            return view('userDash', compact('UsersRole'));
+            return view('search');
+            // return view('userDash', compact('UsersRole'));
         } else if ($RoleId == 4) {
-            return view('admin.adminDash', compact('UsersRole'));
+            return view('adminM.master', compact('UsersRole'));
+            // return view('admin.adminDash', compact('UsersRole'));
         } else if ($RoleId == 1) {
             $PartnerHotels = $Partner->hotels->count();
             return view('partners.partnerDash', compact('UsersRole', 'Partner', 'PartnerHotels'));
         } else {
             return view('auth.login');
         }
-
     }
-
     //Updates a User Role to Partner if the Admin accepts the Partner Request.
     public function update(Proposal $proposal, Role $role, Partner $partner)
     {

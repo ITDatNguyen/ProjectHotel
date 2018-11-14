@@ -69,6 +69,12 @@
             <dd class="col sm-7">
               {{ $hotel->Address}}
             </dd>
+            <dt class="col-sm-5">Tiện Ích:</dt>
+            <dd class="col sm-7">
+              @foreach($hotel->facilitys as $value)
+                 <span style="border: solid 1px #CC99CC;">{{ $value->name}}</span>
+              @endforeach
+            </dd>
             <dt class="col-sm-5">Số điện thoại:</dt>
             <dd class="col sm-7">
               {{ $hotel->TelephoneNumber}}

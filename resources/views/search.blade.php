@@ -106,7 +106,7 @@
                         <figcaption>
                             <!--<strong>YOY <span class="txt-name-location">ĐÀ NẴNG</span></strong>-->
                             <h3 style="margin-top: 20%">
-                                YOY <span class="txt-name-location" name="county" value="Hải Châu" >Quận Hải Châu</span>
+                                YOY <span class="txt-name-location" name="County" value="Hải Châu" >Quận Hải Châu</span>
                             </h3>
                             <a href="hotel/location=hải+châu"></a>
                             <p>Lập kế hoạch nghỉ ngơi những điểm yêu thích tại Đà Nẵng. 50% Off</p>
@@ -118,7 +118,7 @@
                         <img src="../img/homepage/promotion_2.jpg" width="550px" height="200px" alt="img04" />
                         <figcaption>
                             <h3>
-                                YOY <span class="txt-name-location" name="county" value="Sơn Trà">Quận Sơn Trà</span>
+                                YOY <span class="txt-name-location" name="County" value="Sơn Trà">Quận Sơn Trà</span>
                             </h3>
                             <a href="hotel/location=sơn+trà"></a>
                             <p>50% Off</p>
@@ -129,9 +129,9 @@
                         <img src="../img/homepage/promotion_3.jpg" width="550px" height="200px" alt="img04" />
                         <figcaption>
                             <h3>
-                                YOY <span class="txt-name-location" name="county" value="Hòa Khánh">Quận Hòa Khánh</span>
+                                YOY <span class="txt-name-location" name="County" value="Liên Chiểu">Quận Liên Chiểu</span>
                             </h3>
-                            <a href="hotel/location=hòa+khánh"></a>
+                            <a href="hotel/location=liên+chiểu"></a>
                             <p>50% Off</p>
                             <!--<a href="#">View more</a>-->
                         </figcaption>

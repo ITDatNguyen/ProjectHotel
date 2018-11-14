@@ -41,9 +41,7 @@
     </style>
     @yield('charts')
     <script>
-        window.Laravel = <?php echo json_encode([
-            'csrfToken' => csrf_token(),
-        ]); ?>
+        
         window.onscroll = function() {scrollFunction()};
         function scrollFunction() {
             if (document.body.scrollTop > 30 || document.documentElement.scrollTop > 30) {
@@ -62,7 +60,8 @@
 <body style="background-color: #e6eaed!important;font-family: MuseoSans,sans-serif;">
     @yield('css')
     @include('layouts.head')
-    @include('layouts.header') @yield('content')
+    @include('layouts.header') 
+    @yield('content')
     @include('layouts.footer')
     <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
     <script src="/js/app.js"></script>

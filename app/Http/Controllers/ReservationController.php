@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Stripe\Stripe;
+use Config;
 use App\Hotel;
 use App\Reservation;
 use App\Room;
@@ -63,7 +64,6 @@ class ReservationController extends Controller
         $reservation->checkOut = $sec;
         $reservation->totalPrice = $totalcost;
         $user->addReservation($reservation);
-
         return redirect('/home');
 
     }
@@ -106,4 +106,5 @@ class ReservationController extends Controller
         //  return view('pdfview',compact('reservation','hotel','hotelphoto'));
 
     }
+    
 }

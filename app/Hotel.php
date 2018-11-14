@@ -72,4 +72,8 @@ class Hotel extends Model
 
        return (bool) $this->reviews()->first();
     }
+
+    public function facilitys(){
+        return $this->belongsToMany('App\Facility', 'hotels_fac','hotel_id','fac_id');
+    }
 }

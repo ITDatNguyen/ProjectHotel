@@ -23,9 +23,23 @@
       <div class="form-group">
           <label for="Countybox" class="col-2 col-form-label">Quận :</label>
         <div class="col-8">
-          <input class="form-control" name="County" type="text" value="" id="Countybox">
+            <select  name="County" class="form-control">
+              @foreach ( $array as $county=>$quan )
+                <option value="{{$quan}}">{{$quan}}</option>
+              @endforeach 
+            </select>
         </div>
       </div>
+      <div class="row" style="margin-left:5px;">
+        <div class="form-group">
+            <label for="Facilitybox" class="col-2 col-form-label">Tiện ích :</label>
+          <div class="row">
+            @foreach ( $facilities as $key => $name )
+              <span style="padding-left: 15px;"><input name="name[]" type="checkbox" value="{{$key }}"> {{$name }}</span>
+            @endforeach 
+          </div>
+        </div>
+    </div>
       <div class="form-group">
           <label for="Citybox" class="col-2 col-form-label">Thành phố :</label>
         <div class="col-8">

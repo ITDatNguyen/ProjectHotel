@@ -6,6 +6,7 @@ use App\Hotel;
 use App\Partner;
 use App\Reservation;
 use App\User;
+use App\Facility;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -179,10 +180,11 @@ class HotelsController extends Controller
         $Hotel->Country = $request->Country;
         $Hotel->TelephoneNumber = $request->TelephoneNumber;
         $Hotel->ImagePath = $request->ImagePath;
-        $Hotel->description = $request->description;
+        $Hotel->description = $request->description;        
         $partner->hotels()->save($Hotel);
-
         $HotelId = $Hotel->id;
+        
+        $Hotel->facilitys()->sync($request->name, false);
         $CurrentHotel = Hotel::find($HotelId);
 
         $File = $request->file('displaypic');
@@ -219,7 +221,11 @@ class HotelsController extends Controller
 
         $Photos = $hotel->photos->shift();
 
-        return view('partners.edithotel', compact('hotel', 'Partner', 'Photos'));
+        $facilities =Facility::pluck('name','id')->all();
+        $array = ['Hải Châu','Thanh Khê ', 'Sơn Trà ', 'Ngũ Hành Sơn' ,
+                 'Liên Chiểu', 'Hòa Vang' ,'Cẩm Lệ', 'Hoàng Sa'];
+
+        return view('partners.edithotel', compact('hotel', 'Partner', 'Photos','array','facilities'));
 
     }
 
@@ -256,31 +262,10 @@ class HotelsController extends Controller
 
     }
 
-    public function countyhc(Request $request)
+    public function countyhc()
     {
-    
-            $Hotels = Hotel::where('County','Hải Châu')
-            ->get();          
-        return view('hotels.allhotels', compact('Hotels'));
-
+        $Hotel = Hotel::where();
     }
-    public function countyst(Request $request)
-    {
     
-            $Hotels = Hotel::where('County','Sơn Trà')
-            ->get();        
-
-        return view('hotels.allhotels', compact('Hotels'));
-
-    }
-    public function countyhk(Request $request)
-    {
     
-            $Hotels = Hotel::where('County','Hòa Khánh')
-            ->get();        
-
-        return view('hotels.allhotels', compact('Hotels'));
-
-    }
-
 }

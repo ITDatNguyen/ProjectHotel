@@ -17,7 +17,6 @@ class CreateHotelPhotosTable extends Migration
             $table->increments('id');
             $table->integer('hotel_id')->unsigned();
             $table->string('path');
-            $table->foreign('hotel_id')->references('id')->on('hotels')->onDelete('cascade');
             $table->timestamps();
         });
     }

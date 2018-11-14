@@ -12,10 +12,9 @@ Route::get('/', function () {
 Route::get('/profile', function () {
     return view('profile');
 });
-
-Route::get('hotel/location=hải+châu','HotelsController@countyhc');
-Route::get('hotel/location=sơn+trà','HotelsController@countyst');
-Route::get('hotel/location=hòa+khánh','HotelsController@countyhk');
+Route::get('hotel/location=hải+châu','PartnerController@countyhc');
+Route::get('hotel/location=sơn+trà','PartnerController@countyst');
+Route::get('hotel/location=liên+chiểu','PartnerController@countylc');
 // Advanced Search
 Route::get('/search', function () {
     return view('search');
@@ -112,3 +111,4 @@ Route::get('/reservations/{reservation}/pdf', 'ReservationController@pdfview');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+

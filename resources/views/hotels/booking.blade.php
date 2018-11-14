@@ -85,13 +85,10 @@
                         <label for="first">Guest Last Name:</label>
                         <input class="form-control pull-right" name="lastname" id="last" type="text" required="Last Name" />
                     </div>
-
-
-
                 </div>
 
                 <hr />
-                <button type="submit" class="btn btn-success">Book Now!</button>
+                <button type="submit" class="btn btn-success" scr="hotels.payal">Book Now!</button>
             </center>
 
         </form>

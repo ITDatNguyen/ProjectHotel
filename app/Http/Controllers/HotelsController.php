@@ -6,6 +6,7 @@ use App\Hotel;
 use App\Partner;
 use App\Reservation;
 use App\User;
+use Mail;
 use Auth;
 use Illuminate\Http\Request;
 

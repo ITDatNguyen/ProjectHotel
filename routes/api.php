@@ -13,4 +13,4 @@
 
 
  
-Route::post('/payment/{tien}', 'ReservationController@storePayment');
+Route::post('/payment', 'ReservationController@storePayment');

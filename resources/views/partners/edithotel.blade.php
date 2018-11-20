@@ -154,7 +154,7 @@
     </div>
   </div>
   <div class="form-group">
-      <label for="viewbox" class="col-2 col-form-label">Xem:</label>
+      <label for="viewbox" class="col-2 col-form-label">View:</label>
     <div class="col-10">
       <input class="form-control" name="View" type="text"  id="viewbox">
     </div>

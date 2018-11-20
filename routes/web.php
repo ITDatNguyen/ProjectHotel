@@ -5,9 +5,9 @@
 |--------------------------------------------------------------------------
  */
 // Homepage
-Route::get('/', function () {
+Route::get('/search', function () {
     return view('search');
-})->name('HomePage');
+});
 
 Route::get('/profile', function () {
     return view('profile');
@@ -15,6 +15,9 @@ Route::get('/profile', function () {
 Route::get('hotel/location=hải+châu','PartnerController@countyhc');
 Route::get('hotel/location=sơn+trà','PartnerController@countyst');
 Route::get('hotel/location=liên+chiểu','PartnerController@countylc');
+Route::get('/paypal', function () {
+    return view('hotels.paypal');
+});
 // Advanced Search
 Route::get('/search', function () {
     return view('search');
@@ -49,6 +52,7 @@ Route::post('hotels/{partner}/add', 'HotelsController@store');
 // Search for Hotels and Select a Hotel.
 
 Route::post('/search', 'HotelsController@index');
+
 
 Route::get('/guestsearch', 'HotelsController@guestview');
 
@@ -111,4 +115,4 @@ Route::get('/reservations/{reservation}/pdf', 'ReservationController@pdfview');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
-
+Route::get('/', 'HotelsController@showallhotel');

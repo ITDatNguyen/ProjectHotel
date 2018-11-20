@@ -7,6 +7,7 @@ use App\Partner;
 use App\Reservation;
 use App\User;
 use App\Facility;
+use Mail;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -217,13 +218,15 @@ class HotelsController extends Controller
     // Display the Edit Hotels Form .
     public function edit(Hotel $hotel, Partner $partner)
     {
+        $facilities =Facility::pluck('name','id')->all();
+        $array = ['Hải Châu','Thanh Khê ', 'Sơn Trà ', 'Ngũ Hành Sơn' ,
+                 'Liên Chiểu', 'Hòa Vang' ,'Cẩm Lệ', 'Hoàng Sa'];
+
         $Partner = $hotel->partner;
 
         $Photos = $hotel->photos->shift();
 
-        $facilities =Facility::pluck('name','id')->all();
-        $array = ['Hải Châu','Thanh Khê ', 'Sơn Trà ', 'Ngũ Hành Sơn' ,
-                 'Liên Chiểu', 'Hòa Vang' ,'Cẩm Lệ', 'Hoàng Sa'];
+        
 
         return view('partners.edithotel', compact('hotel', 'Partner', 'Photos','array','facilities'));
 
@@ -261,11 +264,12 @@ class HotelsController extends Controller
         return redirect('/home');
 
     }
-
-    public function countyhc()
+    public function showallhotel()
     {
-        $Hotel = Hotel::where();
+        $Hotels = Hotel::all();
+        return view('search',compact('Hotels'));
     }
+    
     
     
 }

@@ -1,5 +1,5 @@
 <footer>
-    <div class="container-fluid">
+    <div id="footer" class="container-fluid">
         <div id="left-footer">
             <a href="../Pages/homepage.html" style="color: #969595">
                 <span style="font-size: 30px; font-weight: bold">OYO</span>

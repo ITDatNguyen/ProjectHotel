@@ -54,7 +54,7 @@
     }
 </style>
 <header>
-    <div class="container-fluid" style="font-size: 13px;" >
+    <div class="container-fluid" style="font-size: 13px; background-color: white;"  >
         <div id="left-header" >
             <a href="{{URL::asset('/')}}" target="_self" title="Về trang chủ">
                 <img class="animated bounce" src="{{URL::asset('/img/img/logo.png')}}" width="110px" height="64px"/> <span href={{url('/')}}>Mạng đặt phòng khách sạn Online</span>
@@ -137,13 +137,13 @@
                 </div>
                 @endif
             </div>
-            <div id="star" style="float: left; border-right: solid thin rgb(238,238,238); margin-right: 5px">
+            <div id="star" style="float: left; border-right: solid thin rgb(238,238,238); margin-right: 5px;    height: 60px;">
                 <img id="language" src="{{URL::asset('/img/img/flagvn_thumbnail.png')}}" onclick="var $src = $(this).attr('src');
                         if ($src == 'header-footer/img/flagvn_thumbnail.png'){
                             $(this).attr('src','header-footer/img/flageng_thumbnail.png');
                             } else {
                             $(this).attr('src','header-footer/img/flagvn_thumbnail.png');
-                        }" style="margin-right: 15px; " width="32px" height="24px" title="Chọn ngôn ngữ" />
+                        }" style="margin-right: 15px;margin-top: 13px " width="32px" height="24px" title="Chọn ngôn ngữ" />
             </div>
             <a href="modal-user/user-24h.html" data-toggle="modal" data-target="#myModal-24h" title="Gọi trực tuyến" style="color: white; float: left">
                 <img src="{{URL::asset('/img/img/24h_white.png')}}"/>

@@ -66,12 +66,12 @@
     @include('layouts.head')
     @include('layouts.header') 
     <div id="a">
-    @include('layouts.header')
+        @include('layouts.header')
     </div>
     @yield('content')
     @include('layouts.footer')
-    <a id="myBtn" href="#a">Top</a>
-    <script src="/js/app.js"></script>
+        <a id="myBtn" href="#a">Top</a>
+        <script src="/js/app.js"></script>
     @yield('scripts')
 </body>
 

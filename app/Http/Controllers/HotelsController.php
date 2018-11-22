@@ -171,7 +171,6 @@ class HotelsController extends Controller
 
     public function store(Request $request, Hotel $hotel, Partner $partner)
     {
-
         $Hotel = new Hotel;
         $Hotel->Name = $request->Name;
         $Hotel->Address = $request->Address;

@@ -22,6 +22,11 @@ class CreateProposalTable extends Migration
             $table->string('CompanyEmail');
             $table->string('HQAddress');
             $table->text('Vision');
+            $table->string('ImagePath');
+            $table->string('phone_number');
+            $table->string('country_code');
+            $table->string('authy_id')->nullable();
+            $table->boolean('verified')->default(false);
             $table->timestamps();
         });
     }

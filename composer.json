@@ -9,7 +9,10 @@
         "barryvdh/laravel-dompdf": "^0.8.0",
         "consoletvs/charts": "3.*",
         "laravel/framework": "5.3.*",
-        "stripe/stripe-php": "5.*"
+        "stripe/stripe-php": "5.*",
+        "twilio/sdk": "^5.0",
+        "authy/php": "~2.4",
+        "intervention/image": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

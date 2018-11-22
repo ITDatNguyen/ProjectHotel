@@ -15,8 +15,9 @@ Route::get('/profile', function () {
 Route::get('/paypal', function () {
     return view('hotels.paypal');
 });
-
-
+Route::post('/user/verify',
+    ['uses' => 'ProposalController@verify', 'as' => 'user-verify', ]
+);
 
 Route::get('hotel/location=hải+châu', 'HotelsController@countyhc');
 Route::get('hotel/location=sơn+trà', 'HotelsController@countyst');

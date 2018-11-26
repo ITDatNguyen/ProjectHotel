@@ -18,11 +18,12 @@ class CreateReservationsTable extends Migration
             $table->integer('hotel_id')->unsigned();
             $table->integer('room_id')->unsigned();
             $table->integer('user_id')->unsigned();
-            $table->string('guestFirstName');
-            $table->string('guestlastName');
+            $table->string('guestName');
+            $table->string('phone');
             $table->date('CheckIn');
             $table->date('CheckOut');
             $table->integer('totalPrice')->unsigned();
+            $table->boolean('statuspayment');
             $table->timestamps();
         });
     }

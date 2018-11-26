@@ -15,9 +15,8 @@ Route::get('/profile', function () {
 Route::get('hotel/location=hải+châu','PartnerController@countyhc');
 Route::get('hotel/location=sơn+trà','PartnerController@countyst');
 Route::get('hotel/location=liên+chiểu','PartnerController@countylc');
-Route::get('/paypal', function () {
-    return view('hotels.paypal');
-});
+//Route::get('/paypal', 'ReservationController@showpayment')->name('paypal');
+
 // Advanced Search
 Route::get('/search', function () {
     return view('search');

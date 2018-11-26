@@ -1,4 +1,4 @@
-@extends('layouts.app') 
+ <input type="number" name="money" value={{$tien}} hidden />@extends('layouts.app') 
 @section('content')
 <script src="{{URL::asset('http://code.jquery.com/jquery-1.10.2.js')}}"></script>
 <script src="{{URL::asset('http://code.jquery.com/ui/1.11.2/jquery-ui.js')}}"></script>
@@ -37,7 +37,7 @@
                         {{ csrf_field()}}
                         <div class="form-row">
                             <br>
-                            <input type="number" name="money" value={{$tien}} hidden />
+                             <input type="number" name="money" value="{{$tien}}" hidden />
                             <label for="card-element">
                             Số Tiền : {{$tien}}
                             </label><br>
@@ -47,10 +47,6 @@
                             <div id="card-element">
                             </div>
                             <br>
-                            <label for="card-element">
-                                Xác nhận lại đơn hàng tại gmail của bạn {{$email}}
-                            </label>
-                            
                             <input type="text" name="emailuser" value={{$email}} hidden />
                             <input type="text" name="infor" value={{$hotel}} hidden />
                             <!-- Used to display form errors. -->
@@ -65,7 +61,7 @@
 
     <script src="https://js.stripe.com/v3/"></script>
     <script>
-        var stripe = Stripe('pk_test_eCX9wg6qMxiNtIYTQioK7JJX');
+        var stripe = Stripe('pk_test_ItuZYuR5FyuPR4aFtaEFKlmh');
             var elements = stripe.elements();
             var style = {
         base: {

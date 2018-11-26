@@ -14,7 +14,7 @@ class AddDescriptionToHotelsTable extends Migration
     public function up()
     {
       Schema::table('hotels', function (Blueprint $table) {
-          $table->string('description');
+          $table->text('description');
       });
     }
 

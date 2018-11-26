@@ -145,23 +145,7 @@
         </div>
 <div id="comment">
     <div class="container-fluid">
-        <div id="comment_title"> <span>Khách Sạn Có Khuyến Mãi</span></div>
-        @foreach ($Hotels as $Hotel)
-        <div class="card">
-          <div>
-            <img class="card-img-top" style="height: 170px; width: 100%; padding: 7px" src="{{$Hotel->thumbnail->path}}" alt="Card image">
-          </div>
-          <div class="card-block">
-            <h4 class="card-Title">{{ $Hotel->Name}}</h4>
-            <p class ="card-text">{{$Hotel->description}}</p>
-         </div>
-          @if (Auth::check())
-            <a href="/hotels/{{$Hotel->id}}" class="btn btn-primary" style="float: right;margin: 0px 10px 5px 10px;">Xem</a>
-            @else
-              <a href="/login" class="btn btn-primary" style="float: right;margin: 0px 10px 5px 10px;">Xem</a>
-            @endif
-         </div>
-    @endforeach
+        
 </div>
 @endsection
 

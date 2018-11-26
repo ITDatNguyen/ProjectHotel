@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Stripe\Stripe;
+use Config;
 use App\Hotel;
 use App\Reservation;
 use App\Room;
@@ -18,7 +19,6 @@ class ReservationController extends Controller
     //Shows the User their Reservation Details before confirmation.
     public function index(Hotel $hotel, Room $room, Request $request)
     {
-
         if (Auth::check()) {
 
             $UID = Auth::id();
@@ -47,25 +47,49 @@ class ReservationController extends Controller
     }
     public function store(Hotel $hotel, Room $room, Request $request, Reservation $reservation, $first, $sec, $protectedCost)
     {
+
+        if($request->thanhtoan=="Thanh Toán Tại Khách Sạn")
+        {
         $uid = Auth::id();
         $user = User::find($uid);
         $email = $user->email;
         $hotel = $room->hotel;
         $hotelid = $hotel->id;
-        $firstname = $request->firstname;
-        $lastname = $request->lastname;
         $totalcost = Crypt::decrypt($protectedCost);
         $reservation = new Reservation;
         $reservation->hotel_id = $hotelid;
         $reservation->room_id = $room->id;
-        $reservation->guestFirstName = $request->firstname;
-        $reservation->guestlastName = $request->lastname;
+        $reservation->guestName = $request->guestName;
+        $reservation->phone = $request->phone;
         $reservation->checkIn = $first;
         $reservation->checkOut = $sec;
         $reservation->totalPrice = $totalcost;
+        $reservation->statuspayment='0';
         $user->addReservation($reservation);
+        Session::flash('status','Bạn Đã Đặt Phòng Thành Công!');
+         return view('hotels.payment');
+
+        }else if($request->thanhtoan=="Thanh Toán Qua visa")
+        {
+        $uid = Auth::id();
+        $user = User::find($uid);
+        $email = $user->email;
+        $hotel = $room->hotel;
+        $hotelid = $hotel->id;
+        $totalcost = Crypt::decrypt($protectedCost);
+        $reservation = new Reservation;
+        $reservation->hotel_id = $hotelid;
+        $reservation->room_id = $room->id;
+        $reservation->guestName = $request->guestName;
+        $reservation->phone = $request->phone;
+        $reservation->checkIn = $first;
+        $reservation->checkOut = $sec;
+        $reservation->totalPrice = $totalcost;
+         $reservation->statuspayment='1';
+         $user->addReservation($reservation);
         $tien = $reservation->totalPrice;
         return view('hotels.paypal', compact('tien','email','hotel'));
+        }
     }
     public function show(User $user, Reservation $reservation)
     {
@@ -96,27 +120,36 @@ class ReservationController extends Controller
          return view('pdfview',compact('reservation','hotel','hotelphoto'));
     }
 
-    public function storePayment(Request $request)
+    public function storePayment(Request $request ,Reservation $reservation)
     {
         
         $pay = $request->money;
         $email = $request->emailuser;
         $hotel = $request->infor;
-        Mail::send('mailfb', array("name"=>'',"email"=>'',"content"=>'Bạn đã đặt phòng tại khách sạn 
+                Mail::send('mailfb', array("name"=>'',"email"=>'',"content"=>'Bạn đã đặt phòng tại khách sạn 
             chi tiết xem tại website
         '), function($message) use($email){
             $message->to($email)->subject('Thông báo đặt phòng!')->from('hotelbookingdanang@gmail.com', 'OYO.com')
             ->sender('hotelbookingdanang@gmail.com', 'OYO.com');
         });
-        \Stripe\Stripe::setApiKey("sk_test_AjKoauWz7orJbCOdHku4OFO9");
+        \Stripe\Stripe::setApiKey("sk_test_YeyrVrdYxmFLBK4PozNf77eR");
         $token = $_POST['stripeToken'];
-        $charge = \Stripe\Charge::create([
-            'amount' =>strrev($pay),
+        try {
+            $charge = \Stripe\Charge::create(array(
+            'amount' =>$pay,
             'currency' => 'usd',
-            'description' => 'Example charge',
+            'description' => 'Payment Booking Room',
             'source' => $token,
-        ]);
+            ));
+        } catch (\Stripe\Error\Card $e) {
+            $id = $reservation->id;
+        $reservation = Reservation::find($id);
+        $reservation->delete();
+            Session::flash('status','lỗi!');
+        }
+        Session::flash('status','Bạn Đã Đặt Phòng Thành Công!');
         return view('hotels.payment');
     }
     
 }
+//strrev($pay)

@@ -8,10 +8,9 @@
 Route::get('/', function () {
     return view('search');
 })->name('HomePage');
-
-Route::get('/profile', function () {
-    return view('profile');
-});
+Route::get('/mail', function () {
+    return view('mail');
+})->name('mail');
 Route::get('/paypal', function () {
     return view('hotels.paypal');
 });
@@ -44,7 +43,7 @@ Route::get('/partners/{partner}/remove', 'PartnerController@remove');
 Route::get('partner/apply', 'ProposalController@index');
 Route::get('partner/{user}/status', 'ProposalController@status');
 Route::post('/proposal/{user}/new', 'ProposalController@store');
-
+Route::get('/profile', 'ProposalController@profile');
 //Partner - View a Hotels Reservations and Add a New Hotel.
 
 Route::get('partners/{partner}/newhotel', 'PartnerController@addHotel');

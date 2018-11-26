@@ -23,6 +23,7 @@ class CreateProposalTable extends Migration
             $table->string('HQAddress');
             $table->text('Vision');
             $table->string('ImagePath');
+            $table->string('image_cm');
             $table->string('phone_number');
             $table->string('country_code');
             $table->string('authy_id')->nullable();

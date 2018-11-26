@@ -42,7 +42,6 @@ class User extends Authenticatable
     }
 
     public function addProposal(Proposal $proposal) {
-
             return $this->proposals()->save($proposal);
 
     }

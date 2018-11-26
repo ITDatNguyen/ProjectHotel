@@ -14,10 +14,18 @@
         <a class="btn btn-sm btn-default pull-right "href="/reservations/{{$reservation->id}}/pdf">Download PDF</a>
           <h5><u> {{$reservation->room->hotel->Name}}</u></h5>
           <p><mark>Loại phòng :</mark> {{$reservation->room->RoomType}}.  </p>
-          <p><mark>Tên khách :</mark>  {{$reservation->guestFirstName}} {{$reservation->guestlastName}}.  </p>
-          <p><mark>Ngày nhận phòng :</mark> {{$reservation->CheckIn}}.  </p>
-          <p><mark>Ngày trả phòng:</mark> {{$reservation->CheckOut}}.  </p>
+          <p><mark>Tên khách :</mark>  {{$reservation->guestName}}</p>
+          <p><mark>SĐT :</mark>  {{$reservation->phone}}</p>
+          <p><mark>Ngày nhận phòng :</mark> {{ \Carbon\Carbon::parse($reservation->CheckIn)->format('d/m/Y')}}.  </p>
+          <p><mark>Ngày trả phòng:</mark> {{ \Carbon\Carbon::parse($reservation->CheckOut)->format('d/m/Y')}}.   </p>
           <p><mark>Tổng giá :</mark> {{$reservation->totalPrice}} vnd.  </p>
+          @if($reservation->statuspayment==0)
+            <p><mark>Trạng Thái :</mark>Chưa Thanh Toán</p>
+          @else
+           <p><mark>Trạng Thái :</mark>Đã Thanh Toán</p>
+          
+          @endif
+
 
 
           <hr />

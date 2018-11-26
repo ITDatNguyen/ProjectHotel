@@ -2,7 +2,9 @@
 @section('content')
 <div class="row">
     <div style="margin-top: 69px">
-        <label style="margin-left: 37%">Thanh toán thành công</label>
+       @if (session('status'))
+        <div class="alert alert-info">{{session('status')}}</div>
+    @endif
     </div>
 </div>
 @endsection

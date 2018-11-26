@@ -21,11 +21,12 @@ class CreateReservationsTable extends Migration
             $table->foreign('room_id')->references('id')->on('rooms');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string('guestFirstName');
-            $table->string('guestlastName');
+            $table->string('guesttName');
+            $table->string('phone');
             $table->date('CheckIn');
             $table->date('CheckOut');
             $table->integer('totalPrice')->unsigned();
+            $table->boolean('statuspayment');
             $table->timestamps();
         });
     }

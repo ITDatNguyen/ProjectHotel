@@ -12,12 +12,13 @@
 <script src="{{URL::asset('http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js')}}"></script>
 <link rel="stylesheet" href="{{URL::asset('//cdnjs.cloudflare.com/ajax/libs/authy-forms.css/2.2/form.authy.min.css')}}">
 <link rel="stylesheet" href="{{ URL::asset('../css/application.css') }}">
-<link rel="stylesheet" href="{{URL::asset('../css/css.css')}}"> @if (is_null($User->proposals))
+<link rel="stylesheet" href="{{URL::asset('../css/css.css')}}"> 
+@if (is_null($User->proposals))
 
 <body style="background-color: rgb(230, 234, 237)">
-	<div class="row">
+	<div class="row" >
 		<div class="col-md-10 col-md-offset-1" style="display: block">
-			<form id="msform" method="POST" action="/proposal/{{$User->id}}/new" files='true' enctype="multipart/form-data">
+			<form id="msform" method="POST" action="/proposal/{{$User->id}}/new" enctype="multipart/form-data">
 				{{ csrf_field()}}
 				<ul id="progressbar">
 					<li class="active">THÔNG TIN ÐỐI TÁC</li>
@@ -41,9 +42,7 @@
 						</div>
 						<div class="col-sm-5">
 							<p for="imagebox" style="text-align: justify;">Ảnh hoặc logo của công ty :</p>
-							{{-- <input type="hidden" value="imag.jpg" name="ImagePath" /> --}} {{-- <input type="file" name="displaypic" id="imagebox"
-							 required> --}}
-							<input type="file" name="featured_img" id="">
+							<input type="file" name="file">
 						</div>
 					</div>
 					<input type="button" name="next" class="next action-button" value="Tiếp theo" />
@@ -53,11 +52,12 @@
 					<h3 class="fs-subtitle">Hãy cho chúng tôi biết thêm thông tin về bạn</h3>
 					<input type="text" name="fname" placeholder="Tên" required />
 					<input type="text" name="lname" placeholder="Họ" required/>
+					<input type="text" name="card" placeholder="Mã thẻ ngân hàng" required/>
 					<input type="text" name="country_code" id='authy-countries' placeholder="Quốc Gia" required/>
 					<input type="text" name="phone_number" id='authy-cellphone' placeholder="Số điện thoại" required/>
 					<input type="text" name="cv" placeholder="Chức vị" required/>
 					<p style="text-align: justify;">Ảnh chứng minh nhân dân :</p>
-					<input type="hidden" value="imag.jpg" name="ImagePath" /> {{-- <input type="file" name="displaypic" id="imagebox"> --}}
+					<input type="file" name="file_cm">
 					<input type="button" name="previous" class="previous action-button-previous" value="Quay về" />
 					<input type="submit" class="action-button" value="Ðăng ký" />
 				</fieldset>

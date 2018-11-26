@@ -1,7 +1,15 @@
 @extends('layouts.app') 
 @section('content')
 <div>
-  <div class="col-md-8 col-md-offset-2" style="margin-top: 69px;">
+    
+  <div class="col-md-8 col-md-offset-2" style="margin-top: 69px">
+      @if (Session::has('error'))
+      <div style="margin-top: 31px">
+          <div class="alert alert-success" role="alert">
+              <strong>Thông báo:</strong> {{ Session::get('error')}}
+          </div>
+      </div>
+      @endif
     <div class="panel panel-default" style="border-top-color: #e74c3c;">
       <div class="panel-heading">Đối tác với OYO.com </div>
       <div class="panel-body">

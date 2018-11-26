@@ -11,8 +11,7 @@
         "laravel/framework": "5.3.*",
         "stripe/stripe-php": "5.*",
         "twilio/sdk": "^5.0",
-        "authy/php": "~2.4",
-        "intervention/image": "dev-master"
+        "authy/php": "~2.4"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -35,6 +35,7 @@ class HomeController extends Controller
         $UsersRole = $CurrentUser->role;
         $Partner = $CurrentUser->partners;
         $RoleId = $UsersRole->id;
+        // dd($RoleId);
         //Depending on the Role Id different Dashboards are loaded.
         if ($RoleId == 2) {
             return view('search');
@@ -43,8 +44,10 @@ class HomeController extends Controller
             return view('adminM.master', compact('UsersRole'));
             // return view('admin.adminDash', compact('UsersRole'));
         } else if ($RoleId == 1) {
+            // return view('search');
             $PartnerHotels = $Partner->hotels->count();
             return view('partners.partnerDash', compact('UsersRole', 'Partner', 'PartnerHotels'));
+            // return view('/profile', compact('proposal'));
         } else {
             return view('auth.login');
         }

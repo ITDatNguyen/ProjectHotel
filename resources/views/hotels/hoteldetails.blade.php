@@ -54,7 +54,7 @@
         <div class="ws_script" style="position:absolute;left:-99%"><a href="http://wowslider.net">jquery slider</a> by WOWSlider.com v8.8</div>
         <div class="ws_shadow"></div>
       </div>
-      <div class="panel panel-primary" style="margin-top: 1%;">
+      <div class="panel panel-primary" style="margin-top: 1%;    margin-right: 18px;">
         <div class="panel-heading">
           <h3 class="panel-title">Chi tiết khách sạn:</h3>
         </div>
@@ -92,7 +92,7 @@
           <div>
             <div style="float: left;height: 112px;width: 112px; display: block">
               <img src="https://d1nabgopwop1kh.cloudfront.net/hotel-asset/10410748_0_t2_hr_8744888-131-b.jpg"></div>
-            <div style="float:left   ; width: 48%;">
+            <div style="float:left   ; width: 56%;">
               <p class="text"><b>{{$Room->RoomType}}</b></p>
               <p class="text"><img src="{{URL::asset('/images/succhua.svg') }}" alt="" style="display: inline-block;
                 vertical-align: middle;

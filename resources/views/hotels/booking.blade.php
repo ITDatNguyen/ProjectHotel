@@ -64,7 +64,7 @@
             <div class="ws_images">
           <ul>
             
-             <img style="width:520px" src="{{URL::asset('/Utilities/slideshow/slideshow2/data1/images/room01.jpg')}}" alt="room01" title="room01" id="wows1_0"/>
+             <img style="width:100%" src="{{URL::asset('/Utilities/slideshow/slideshow2/data1/images/room01.jpg')}}" alt="room01" title="room01" id="wows1_0"/>
           </ul>
         </div>
             <script type="text/javascript" src="../Utilities/slideshow/slideshow2/engine1/wowslider.js"></script>

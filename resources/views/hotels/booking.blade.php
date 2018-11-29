@@ -58,15 +58,13 @@
     <div id="header"></div>
 
     <div id="aboutHotel" class="container" style="background-color: rgb(246,245,245); margin: 0; padding: 0">
-        <div id="left-aboutHotel" style="width: 65%; float: left; position: relative; background-color: white">
-        <div class="tmp-left-aboutHotel" style="display: none">...</div>
+        <div id="left-aboutHotel" style="width: 55%; float: left; position: relative; background-color: white">
+        <div class="tmp-left-aboutHotel" style="display: none"></div>
             <!-- Start WOWSlider.com BODY section -->
             <div class="ws_images">
           <ul>
-           
-            <li>
-             <img src="{{URL::asset('/Utilities/slideshow/slideshow2/data1/images/room01.jpg')}}" alt="room01" title="room01" id="wows1_0"/></li>
-           
+            
+             <img style="width:520px" src="{{URL::asset('/Utilities/slideshow/slideshow2/data1/images/room01.jpg')}}" alt="room01" title="room01" id="wows1_0"/>
           </ul>
         </div>
             <script type="text/javascript" src="../Utilities/slideshow/slideshow2/engine1/wowslider.js"></script>
@@ -87,7 +85,7 @@
                 </p>
             </div>
         </div>
-        <div id="right-aboutHotel" style="width: 35%; float: right; bottom: 0">
+        <div id="right-aboutHotel" style="width: 45%; float: right; bottom: 0">
             <div id="right-aboutHotel-1" style="width: 93%; margin: auto; margin-top: 5px">
                 <table class="table borderless myTable-1">
                     <tr style="color: rgb(122,118,118); width: 50%">
@@ -129,12 +127,20 @@
                         </td>
                     </tr>
                 </table>
+                @if(count($errors)>0)
+                    <div class="alert alert-danger">
+                    @foreach($errors->all() as $err)
+                    {{ $err }}<br>
+                    @endforeach
+                    </div>
+                 @endif
                 <div>
                     <button id='datphong' class="btn btn-success" onclick="showInputBox()">
                     ĐẶT PHÒNG
                     </button>
                 </div>
                 <div class="form-group" id='formthanhtoan' hidden>
+                
                     <form method="POST" action="/bookings/new/{{$room->id}}/{{$FirstDate}}/{{$SecDate}}/{{$ProtectedCost}}">
 
                      {{ csrf_field()}}
@@ -146,7 +152,7 @@
                     </div>
                     <div class="col-xs-6">
                         <label for="first">Phone:</label>
-                        <input class="form-control pull-right" name="phone" id="last" type="text" required="phone" />
+                        <input class="form-control pull-right" id="phone" name="phone" id="last" type="number" required="phone" />
                     </div>
                 </div>
                 <hr />
@@ -186,6 +192,7 @@
         webengage.init('~15ba209b4');
         webengage.options('isDemoMode', true);
     </script>
+   
 </div>
 </body>
 </html>

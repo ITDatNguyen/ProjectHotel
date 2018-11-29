@@ -13,12 +13,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Mail;
 use PDF;
-
+use Validator;
+use App\Role;
+use App\Partner;
 class ReservationController extends Controller
 {
     //Shows the User their Reservation Details before confirmation.
     public function index(Hotel $hotel, Room $room, Request $request)
     {
+
         if (Auth::check()) {
 
             $UID = Auth::id();
@@ -45,51 +48,113 @@ class ReservationController extends Controller
             return redirect('/login');
         }
     }
-    public function store(Hotel $hotel, Room $room, Request $request, Reservation $reservation, $first, $sec, $protectedCost)
+    public function store(Partner $partner,Hotel $hotel, Room $room, Request $request, Reservation $reservation, $first, $sec, $protectedCost )
     {
+        $rules= [
+            'guestName'=>'required|min:6|max:100',
+            'phone' => 'required|min:10|max:11,numeric',
+            
+            ];
+    $msg = [
+            'guestName.required'=>'Trường Họ Tên Không Được Để Trống!',
+            'guestName.min'=>'Tên có ít nhất 8 ký tự!',
+            'guestName.max'=>'Tên  tối đa 100 ký tự!',
+            'phone.required'=>'SĐT',
+            'phone.max'=>'Số điện thoại tối đa 11 số',
+            'phone.min'=>'Số điện thoại có tối thiểu 10 số',
+            'phone.numeric'=>'Chỉ nhập số không được phép nhập ký tự'
+            ];
+            $validator = Validator::make($request->all(), $rules , $msg);
+            
+            if ($validator->fails()) {
+                return redirect()->back()
+                            ->withErrors($validator)
+                            ->withInput();
+                        } else{
+                            if($request->thanhtoan=="Thanh Toán Tại Khách Sạn")
+                            {
+                            $uid = Auth::id();
+                            $user = User::find($uid);
+                            $email = $user->email;
+                            $hotel = $room->hotel;
+                            $partnerid=$hotel->partner_id;
+                            $partner=Partner::find($partnerid);
+                            $emailpartner=$partner->CompanyEmail;
+                            $hotelid = $hotel->id;
+                            $totalcost = Crypt::decrypt($protectedCost);
+                            $reservation = new Reservation;
+                            $reservation->hotel_id = $hotelid;
+                            $reservation->room_id = $room->id;
+                            $reservation->guestName = $request->guestName;
+                            $reservation->phone = $request->phone;
+                            $reservation->checkIn = $first;
+                            $reservation->checkOut = $sec;
+                            $reservation->totalPrice = $totalcost;
+                            $reservation->statuspayment='0';
+                            // $json = json_encode($reservation);                           
+                           $user->addReservation($reservation);
+                           Mail::send('mailhotel', array('user'=>$user,'hotel'=>$hotel ,'reservation' => $reservation,"content"=>'Bạn đã đặt phòng tại khách sạn 
+                                chi tiết xem tại website
+                            '), function($message) use($emailpartner){
+                                $message->to($emailpartner)->subject('Thông báo có đặt phòng!')->from('hotelbookingdanang@gmail.com', 'OYO.com')
+                                ->sender('hotelbookingdanang@gmail.com', 'OYO.com');
+                            });
+                    
+                            Mail::send('mailfb', array('user'=>$user, 'reservation' => $reservation,"content"=>'Bạn đã đặt phòng tại khách sạn 
+                                chi tiết xem tại website
+                            '), function($message) use($email){
+                                $message->to($email)->subject('Thông báo đặt phòng!')->from('hotelbookingdanang@gmail.com', 'OYO.com')
+                                ->sender('hotelbookingdanang@gmail.com', 'OYO.com');
+                            });
+                            Session::flash('status','Bạn Đã Đặt Phòng Thành Công!');
+                             return view('hotels.payment');
+                             
+                    
+                            }else if($request->thanhtoan=="Thanh Toán Qua visa")
+                            {
+                            $uid = Auth::id();
+                            $user = User::find($uid);
+                            
+                            $email = $user->email;
+                            $hotel = $room->hotel;
+                            $partnerid=$hotel->partner_id;
+                            $partner=Partner::find($partnerid);
+                            $emailpartner=$partner->CompanyEmail;
+                            $hotelid = $hotel->id;
+                            $totalcost = Crypt::decrypt($protectedCost);
+                            $reservation = new Reservation;
+                            $reservation->hotel_id = $hotelid;
+                            $reservation->room_id = $room->id;
+                            $reservation->guestName = $request->guestName;
+                            $reservation->phone = $request->phone;
+                            $reservation->checkIn = $first;
+                            $reservation->checkOut = $sec;
+                            $reservation->totalPrice = $totalcost;
+                            $reservation->statuspayment='1';
+                            $idreser=$reservation->id;
+                            $user->addReservation($reservation);
+                            $idreser=$reservation->id;
+                           
+                            //
+                            Mail::send('mailhotel', array('user'=>$user,'hotel'=>$hotel ,'reservation' => $reservation,"content"=>'Bạn đã đặt phòng tại khách sạn 
+                                chi tiết xem tại website
+                            '), function($message) use($emailpartner){
+                                $message->to($emailpartner)->subject('Thông báo có đặt phòng!')->from('hotelbookingdanang@gmail.com', 'OYO.com')
+                                ->sender('hotelbookingdanang@gmail.com', 'OYO.com');
+                            });
+                            //
+                             Mail::send('mailfb', array("name"=>'',"email"=>'','user'=>$user,'reservation'=>$reservation,"content"=>'Bạn đã đặt phòng tại khách sạn 
+                                chi tiết xem tại website
+                            '), function($message) use($email){
+                                $message->to($email)->subject('Thông báo đặt phòng!')->from('hotelbookingdanang@gmail.com', 'OYO.com')
+                                ->sender('hotelbookingdanang@gmail.com', 'OYO.com');
+                            });
+                            $tien = $reservation->totalPrice;
+                            return view('hotels.paypal', compact('tien','email','hotel','idreser'));
+                            }
+                        }
 
-        if($request->thanhtoan=="Thanh Toán Tại Khách Sạn")
-        {
-        $uid = Auth::id();
-        $user = User::find($uid);
-        $email = $user->email;
-        $hotel = $room->hotel;
-        $hotelid = $hotel->id;
-        $totalcost = Crypt::decrypt($protectedCost);
-        $reservation = new Reservation;
-        $reservation->hotel_id = $hotelid;
-        $reservation->room_id = $room->id;
-        $reservation->guestName = $request->guestName;
-        $reservation->phone = $request->phone;
-        $reservation->checkIn = $first;
-        $reservation->checkOut = $sec;
-        $reservation->totalPrice = $totalcost;
-        $reservation->statuspayment='0';
-        $user->addReservation($reservation);
-        Session::flash('status','Bạn Đã Đặt Phòng Thành Công!');
-         return view('hotels.payment');
-
-        }else if($request->thanhtoan=="Thanh Toán Qua visa")
-        {
-        $uid = Auth::id();
-        $user = User::find($uid);
-        $email = $user->email;
-        $hotel = $room->hotel;
-        $hotelid = $hotel->id;
-        $totalcost = Crypt::decrypt($protectedCost);
-        $reservation = new Reservation;
-        $reservation->hotel_id = $hotelid;
-        $reservation->room_id = $room->id;
-        $reservation->guestName = $request->guestName;
-        $reservation->phone = $request->phone;
-        $reservation->checkIn = $first;
-        $reservation->checkOut = $sec;
-        $reservation->totalPrice = $totalcost;
-         $reservation->statuspayment='1';
-         $user->addReservation($reservation);
-        $tien = $reservation->totalPrice;
-        return view('hotels.paypal', compact('tien','email','hotel'));
-        }
+        
     }
     public function show(User $user, Reservation $reservation)
     {
@@ -103,7 +168,9 @@ class ReservationController extends Controller
     {
         $id = $reservation->id;
         $reservation = Reservation::find($id);
+       
         $reservation->delete();
+        Session::flash('status','Bạn Đã Hủy Phòng Thành Công!');
         return back();
     }
 
@@ -122,34 +189,37 @@ class ReservationController extends Controller
 
     public function storePayment(Request $request ,Reservation $reservation)
     {
+
+        
         
         $pay = $request->money;
         $email = $request->emailuser;
         $hotel = $request->infor;
-                Mail::send('mailfb', array("name"=>'',"email"=>'',"content"=>'Bạn đã đặt phòng tại khách sạn 
-            chi tiết xem tại website
-        '), function($message) use($email){
-            $message->to($email)->subject('Thông báo đặt phòng!')->from('hotelbookingdanang@gmail.com', 'OYO.com')
-            ->sender('hotelbookingdanang@gmail.com', 'OYO.com');
-        });
+        $id=$request->id;
+        $r=Reservation::find($id);
+        $status=$r->statuspayment;
+        
+         
         \Stripe\Stripe::setApiKey("sk_test_YeyrVrdYxmFLBK4PozNf77eR");
         $token = $_POST['stripeToken'];
         try {
             $charge = \Stripe\Charge::create(array(
             'amount' =>$pay,
-            'currency' => 'usd',
+            'currency' => 'vnd',
             'description' => 'Payment Booking Room',
             'source' => $token,
+           
             ));
         } catch (\Stripe\Error\Card $e) {
-            $id = $reservation->id;
+          
         $reservation = Reservation::find($id);
         $reservation->delete();
             Session::flash('status','lỗi!');
+            return back();
         }
+      
         Session::flash('status','Bạn Đã Đặt Phòng Thành Công!');
         return view('hotels.payment');
     }
     
 }
-//strrev($pay)

@@ -15,14 +15,14 @@ class UsersTableSeeder extends Seeder
         	[
                 'id'=>'1',
                 'name'=>'managerhotel',
-                'email' => 'managerhotel@gmail.com',
+                'email' => 'tringuyendonga@gmail.com',
                 'password'=>bcrypt('123123'),
                 'role_id'=>'2',
         	],
         	[
                 'id'=>'2',
                 'name'=>'user',
-                'email' => 'user@gmail.com',
+                'email' => 'maixuandu96@gmail.com',
                 'password'=>bcrypt('123123'),
                 'role_id'=>'2',
         	],

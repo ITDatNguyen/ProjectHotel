@@ -9,8 +9,9 @@ use Authy\AuthyApi as AuthyApi;
 use DB;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\Request;
-use Session;
 use Mail;
+use Session;
+use App\Partner;
 use Twilio\Rest\Client;
 
 class ProposalController extends Controller
@@ -22,8 +23,12 @@ class ProposalController extends Controller
         if (Auth::check()) {
             $UserId = Auth::id();
             $User = User::find($UserId);
-            $User->load('proposals');
-            return view('apply.becomePartner', compact('User'));
+            if ($User->load('proposals')) {
+                $User->load('proposals');
+                return view('apply.becomePartner', compact('User'));
+            } else {
+                return view('parnert');
+            }
         } else {
             return redirect('/login');
         }
@@ -40,18 +45,10 @@ class ProposalController extends Controller
             $file = $request->file('file');
             $file->move('upload', $filename);
         }
-        if ($request->hasFile('file_cm')) {
-            $image2 = $request->file('file_cm');
-            $fileName3 = $image2->getClientOriginalName();
-            $filename4 = time() . $fileName3;
-            $file4 = $request->file('file_cm');
-            $file4->move('upload', $filename4);
-        }
         // $user->addProposal(new Proposal($request->all()));
         DB::beginTransaction();
         $newUser = new Proposal($values);
         $newUser->ImagePath = $filename;
-        $newUser->image_cm = $filename4;
         // $newUser->addProposal();
         $user->addProposal($newUser);
         // DD($newUser->phone_number);
@@ -81,42 +78,34 @@ class ProposalController extends Controller
 
     }
 
-    public function profile(Proposal $proposal)
-    {
-        if (Auth::check()) {
-            $UserId = Auth::id();
-            $User = User::find($UserId);
-            $proposal = $User->proposals;
-            return view('profile', compact('proposal'));
-        } else {
-            return redirect('/login');
-        }
-    }
-
     public function verify(Request $request, Authenticatable $user, AuthyApi $authyApi, Client $client)
     {
         $token = $request->input('token');
-        $verification = $authyApi->verifyToken($user->proposals->authy_id, $token);
-        if ($verification->ok()) {
-            $user->proposals->verified = true;
-            $user->proposals->save();
-            $UserId = Auth::id();
-            $User = User::find($UserId);
-            $proposal = $User->proposals;
-            $email = $proposal->CompanyEmail;
-            // $this->sendSmsNotification($client, $user);
-            Mail::send('mail', array("name" => '', "email" => '', "content" => 'Bạn đã đăng ký làm đối tác với OYO.com'), function ($message) use ($email) {
-                $message->to($email)->subject('Thông báo đăng ký!')->from('hotelbookingdanang@gmail.com', 'OYO.com')
-                    ->sender('hotelbookingdanang@gmail.com', 'OYO.com');
-            });
-            Session::flash('success', 'Đối tác mới đã được tạo');
-            return view('/profile', compact('proposal'));
-            // return redirect()->route('user-index');
+        if ($token) {
+            $verification = $authyApi->verifyToken($user->proposals->authy_id, $token);
+            if ($verification->ok()) {
+                $user->proposals->verified = true;
+                $user->proposals->save();
+                $UserId = Auth::id();
+                $User = User::find($UserId);
+                $proposal = $User->proposals;
+                $email = $proposal->CompanyEmail;
+                // $this->sendSmsNotification($client, $user);
+                Mail::send('mail', array("name" => '', "email" => '', "content" => 'Bạn đã đăng ký làm đối tác với OYO.com'), function ($message) use ($email) {
+                    $message->to($email)->subject('Thông báo đăng ký!')->from('hotelbookingdanang@gmail.com', 'OYO.com')
+                        ->sender('hotelbookingdanang@gmail.com', 'OYO.com');
+                });
+                Session::flash('success', 'Đối tác mới đã được tạo');
+                return view('/profile', compact('proposal'));
+                // return redirect()->route('user-index');
 
+            } else {
+                // $errors = $this->getAuthyErrors($verification->errors());
+                $request->session()->flash('error', "Mã xác minh sai!");
+                return view('apply.aftersubmit');
+            }
         } else {
-            // $errors = $this->getAuthyErrors($verification->errors());
-            $request->session()->flash('error', "Mã xác minh sai!");
-            return view('apply.aftersubmit');
+            return back();
         }
     }
     private function getAuthyErrors($authyErrors)
@@ -127,20 +116,20 @@ class ProposalController extends Controller
         }
         return $errors;
     }
-    // public function verifyResend(Request $request, Authenticatable $user,
-    //     AuthyApi $authyApi) {
-    //     $sms = $authyApi->requestSms($user->proposals->authy_id);
-    //     if ($sms->ok()) {
-    //         $request->session()->flash(
-    //             'status',
-    //             'Verification code re-sent'
-    //         );
-    //         return back();
-    //     } else {
-    //         $errors = $this->getAuthyErrors($sms->errors());
-    //         return view('verifyUser', ['errors' => new MessageBag($errors)]);
-    //     }
-    // }
+    public function verifyResend(Request $request, Authenticatable $user,
+        AuthyApi $authyApi) {
+        $sms = $authyApi->requestSms($user->proposals->authy_id);
+        if ($sms->ok()) {
+            $request->session()->flash(
+                'status',
+                'Verification code re-sent'
+            );
+            return view('apply.aftersubmit');
+        } else {
+            $request->session()->flash('error', "Mã xác minh sai!");
+            return view('apply.aftersubmit');
+        }
+    }
     public function show(Proposal $proposal)
     {
         $Proposals = Proposal::all();

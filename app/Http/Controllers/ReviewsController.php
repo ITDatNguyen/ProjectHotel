@@ -15,20 +15,15 @@ class ReviewsController extends Controller
 
         $this->validate($request, [
             'comment' => 'required|min:4']);
-
         $Review = new Review($request->all());
         $Review->user_id = Auth::id();
-
         $hotel->addReview($Review);
-
         return back();
     }
 
     public function edit(Review $review)
     {
-
         return view('reviews.edit', compact('review'));
-
     }
 
     // Updates the Review database with specifics edited by the user.

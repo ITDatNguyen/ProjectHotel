@@ -35,4 +35,5 @@ class HotelPhotosController extends Controller
         return back();
 
     }
+   
 }

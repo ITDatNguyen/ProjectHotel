@@ -6,6 +6,7 @@ use App\Hotel;
 use App\Partner;
 use App\Reservation;
 use App\User;
+use App\Facility;
 use Mail;
 use Auth;
 use Illuminate\Http\Request;
@@ -23,35 +24,23 @@ class HotelsController extends Controller
         the correct hotels from these specifics.    */
         if (empty($Searchterm) && empty($NumTravelers)) {
             $Hotels = Hotel::all();
-
         } else if (!empty($Searchterm) && empty($NumTravelers)) {
-
             $Hotels = Hotel::where('Name', 'LIKE', '%' . $Searchterm . '%')
-                ->orwhere('City', 'LIKE', '%' . $Searchterm . '%')
-                ->orwhere('Country', 'LIKE', '%' . $Searchterm . '%')
                 ->orwhere('Address', 'LIKE', '%' . $Searchterm . '%')
                 ->orwhere('County', 'LIKE', '%' . $Searchterm . '%')
                 ->get();
         } else if (empty($Searchterm) && !empty($NumTravelers)) {
-
             $Hotels = Hotel::whereHas('rooms', function ($q) use ($NumTravelers) {
                 $q->where('Capacity', $NumTravelers);
-
             })->get();
         } else if (!empty($Searchterm) && !empty($NumTravelers)) {
             $Hotels = Hotel::whereHas('rooms', function ($q) use ($NumTravelers) {
                 $q->where('Capacity', $NumTravelers);
-
             })->where(function ($q2) use ($Searchterm) {
-
                 $q2->where('Name', 'LIKE', '%' . $Searchterm . '%')
-                    ->orwhere('City', 'LIKE', '%' . $Searchterm . '%')
-                    ->orwhere('Country', 'LIKE', '%' . $Searchterm . '%')
                     ->orwhere('Address', 'LIKE', '%' . $Searchterm . '%')
                     ->orwhere('County', 'LIKE', '%' . $Searchterm . '%');
-
             })->get();
-
         }
        
         // Splits the Date range and puts Check In and Check out into Session Variables.
@@ -75,15 +64,12 @@ class HotelsController extends Controller
         $Photos = $hotel->photos->shift();
         $LoadReserv = $hotel->load('rooms.reservation');
         $Rooms = $hotel->rooms;
-
         // Gets the Checkin and checkout dates from the session variable
         $FirstDate = $request->session()->get('checkin');
         $SecDate = $request->session()->get('checkout');
-
         // Tries to match the checkin and checkout dates with other reservations of the same Hotel room
         foreach ($Rooms as $Room) {
             $Id = $Room->id;
-
             $RoomsBooked = Reservation::where('room_id', '=', $Id)
                 ->where('CheckIn', '>=', $FirstDate)
                 ->where('CheckOut', '<=', $SecDate)
@@ -142,7 +128,6 @@ class HotelsController extends Controller
             $starPath = "/images/NR.png";
             $Rating = "0";
         }
-
         //Checks to see if User has booked the hotel before.
         $UID = Auth::id();
         $User = User::find($UID);
@@ -154,17 +139,9 @@ class HotelsController extends Controller
         }
 
         // Recommends another Hotel
-        $City = $hotel->City;
-        $Recommended = Hotel::inRandomOrder()->where('City', '=', $City)
-            ->where('id', '!=', $hotel->id)
-            ->first();
+     
 
-        if (is_null($Recommended)) {
-            $Recommended = false;
-        }
-
-        return view('hotels.hoteldetails', compact('hotel', 'Photos', 'Rating', 'starPath', 'RecentBooking', 'Recommended'));
-
+        return view('hotels.hoteldetails', compact('hotel', 'Photos', 'Rating', 'starPath', 'RecentBooking'));
     }
 
     // Add a New Hotel to the Website and adds uploaded Thumbnail Photos to the website.
@@ -175,14 +152,13 @@ class HotelsController extends Controller
         $Hotel->Name = $request->Name;
         $Hotel->Address = $request->Address;
         $Hotel->County = $request->County;
-        $Hotel->City = $request->City;
-        $Hotel->Country = $request->Country;
         $Hotel->TelephoneNumber = $request->TelephoneNumber;
         $Hotel->ImagePath = $request->ImagePath;
-        $Hotel->description = $request->description;
+        $Hotel->description = $request->description;        
         $partner->hotels()->save($Hotel);
-
         $HotelId = $Hotel->id;
+        
+        $Hotel->facilitys()->sync($request->name, false);
         $CurrentHotel = Hotel::find($HotelId);
 
         $File = $request->file('displaypic');
@@ -213,21 +189,32 @@ class HotelsController extends Controller
     }
 
     // Display the Edit Hotels Form .
-    public function edit(Hotel $hotel, Partner $partner)
+    public function edit( Partner $partner,$id)
     {
+        $hotel = Hotel::find($id);
         $Partner = $hotel->partner;
-
+        $fas = $hotel->facilitys()->get();
+        $facilities = Facility::get();
+        $array = ['Hải Châu','Thanh Khê ', 'Sơn Trà ', 'Ngũ Hành Sơn' ,
+                 'Liên Chiểu', 'Hòa Vang' ,'Cẩm Lệ', 'Hoàng Sa'];
+        $quancam = $hotel->County;
         $Photos = $hotel->photos->shift();
-
-        return view('partners.edithotel', compact('hotel', 'Partner', 'Photos'));
+        return view('partners.edithotel', compact('hotel', 'Partner', 'Photos','array','facilities','fas','quancam'));
 
     }
 
     //Update the Database with the edited details including thubnailpath if it has been changed.
-    public function update(Request $request, Hotel $hotel)
+    public function update(Request $request,$id)
     {
-
-        $hotel->update($request->all());
+        $hotel = Hotel::find($id);
+        $data = $request->all();
+        $hotel->County = $request->County;
+        if(empty($request->names)){
+            $hotel->facilitys()->sync($request->namet, false);
+        }else{
+            $hotel->facilitys()->sync($request->names, true);
+        }
+        $hotel->update($data);
 
         if (!empty($request->file('displaypic'))) {
 
@@ -255,32 +242,34 @@ class HotelsController extends Controller
         return redirect('/home');
 
     }
-
-    public function countyhc(Request $request)
+    public function showallhotel()
     {
-    
-            $Hotels = Hotel::where('County','Hải Châu')
-            ->get();          
-        return view('hotels.allhotels', compact('Hotels'));
-
+        $Hotels = Hotel::all();
+        return view('search',compact('Hotels'));
     }
-    public function countyst(Request $request)
-    {
     
-            $Hotels = Hotel::where('County','Sơn Trà')
-            ->get();        
-
-        return view('hotels.allhotels', compact('Hotels'));
-
-    }
-    public function countyhk(Request $request)
+    public function indexfacility(Request $request)
     {
-    
-            $Hotels = Hotel::where('County','Hòa Khánh')
-            ->get();        
-
-        return view('hotels.allhotels', compact('Hotels'));
-
+         $Facility = Facility::all();         
+        return view('adminM.addfacility',compact('Facility'));
     }
 
+    public function storefacility(Request $request, Facility $facility)
+    {
+        $Facility = new Facility;
+        $Facility->name = $request->Name;
+        $Facility->save();
+
+       return back();
+    }
+    
+     public function destroyfac(Request $request,Facility $facility,$id)
+    {
+        
+        $Facility = $facility->find($id);
+        $Facility->delete();
+        return back();
+    }
+   
+    
 }

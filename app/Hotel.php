@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Hotel extends Model
 {
-  protected $fillable = ['Name','Address','County','City','Country','TelephoneNumber','description','ImagePath'];
+  protected $fillable = ['Name','Address','County','TelephoneNumber','description','ImagePath'];
 
   // A Hotel Belongs to a Partner .
   public function partner() {
@@ -71,5 +71,9 @@ class Hotel extends Model
     public function hasReview() {
 
        return (bool) $this->reviews()->first();
+    }
+
+    public function facilitys(){
+        return $this->belongsToMany('App\Facility', 'hotels_fac','hotel_id','fac_id');
     }
 }

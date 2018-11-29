@@ -31,7 +31,7 @@
         }
         #left-header{
             float: left;
-            margin-left: 20px;
+            margin-left: 16px;
             line-height: 60px;
         }
         #left-header a:hover{
@@ -73,7 +73,7 @@
         }
         #left-footer{
             float: left;
-            margin-left: 80px;
+            margin-left: 34px;
             margin-top: 30px;
             color: #969595;
         }

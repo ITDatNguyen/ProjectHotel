@@ -38,6 +38,7 @@
                         <div class="form-row">
                             <br>
                              <input type="number" name="money" value="{{$tien}}" hidden />
+                             <input type="number" name="id" value="{{$idreser}}" hidden />
                             <label for="card-element">
                             Số Tiền : {{$tien}}
                             </label><br>

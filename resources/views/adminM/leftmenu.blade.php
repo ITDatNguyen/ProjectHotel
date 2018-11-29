@@ -36,6 +36,7 @@
           <ul class="treeview-menu">
             <li><a href="{{URL::asset('partner/requests')}}"> Yêu cầu đối tác</a></li>
             <li><a href="{{URL::asset('partner/list')}}"> Tất cả đối tác</a></li>
+            <li><a href="{{URL::asset('/facilityadd')}}"> Thêm mới tiện ích</a></li>
           </ul>
         </li>
           </ul>

@@ -18,9 +18,9 @@
        </div>
         @if (Auth::check())
           <a href="/hotels/{{$Hotel->id}}" class="btn btn-primary" style="float: right;margin: 0px 10px 5px 10px;">Xem</a>
-          @else
+           @else
             <a href="/login" class="btn btn-primary" style="float: right;margin: 0px 10px 5px 10px;">Xem</a>
-          @endif
+          @endif 
        </div>
   @endforeach
 </div>

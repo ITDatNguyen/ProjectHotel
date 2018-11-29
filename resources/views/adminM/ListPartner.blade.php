@@ -22,10 +22,9 @@
           <tr>
             <td style="line-height: 31px">{{$Partner->CompanyName}} </td>
             <td><a class="btn btn-danger" href="/proposal/{{$Partner->id}}/remove">Xóa</a></td>
-
           </tr>
           @endforeach
-        </tbody>
+        </tbody> 
       </table>
       {{-- @endforeach --}}
     </div>

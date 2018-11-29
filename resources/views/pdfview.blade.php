@@ -35,8 +35,8 @@
             <div class="panel panel-default">
               <div class="panel-heading"><h3>Chi tiết đặt phòng</h3></div>
                 <div class="panel-body">
-                    <p><b>Tên khách:</b>{{$showdetails->guestFirstName}} {{$showdetails->guestlastName}}</p>
-                    <p><b>Ngày Nhận phòng::  </b>{{$showdetails->CheckIn}}  / <b>Ngày trả phòng:  </b>  {{$showdetails->CheckOut}}</p>
+                    <p><b>Tên khách:</b>{{$showdetails->guestName}} </p>
+                    <p><b>Ngày Nhận phòng::  </b>{{\Carbon\Carbon::parse($showdetails->CheckIn)->format('d/m/Y')}}  / <b>Ngày trả phòng:  </b>  {{\Carbon\Carbon::parse($showdetails->CheckOut)->format('d/m/Y')}}</p>
                     <p><b>Tên phòng:</b> {{$showdetails->room->RoomType}}</p>
                     <p><b>Giường được cung cấp:</b> {{$showdetails->room->BedOption}}</p>
                     <p><b>Phong cảnh:</b> {{$showdetails->room->View}}</p>

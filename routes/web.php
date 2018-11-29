@@ -5,7 +5,7 @@
 |--------------------------------------------------------------------------
  */
 // Homepage
-Route::get('/', function () {
+Route::get('/search', function () {
     return view('search');
 })->name('HomePage');
 Route::get('/mail', function () {
@@ -17,10 +17,15 @@ Route::get('/paypal', function () {
 Route::post('/user/verify',
     ['uses' => 'ProposalController@verify', 'as' => 'user-verify', ]
 );
-
-Route::get('hotel/location=hải+châu', 'HotelsController@countyhc');
-Route::get('hotel/location=sơn+trà', 'HotelsController@countyst');
-Route::get('hotel/location=hòa+khánh', 'HotelsController@countyhk');
+Route::post(
+    '/user/verify/resend',
+    ['uses' => 'ProposalController@verifyResend',
+     'middleware' => 'auth',
+     'as' => 'user-verify-resend']
+);
+Route::get('hotel/location=hải+châu', 'PartnerController@countyhc');
+Route::get('hotel/location=sơn+trà', 'PartnerController@countyst');
+Route::get('hotel/location=liên+chiểu', 'PartnerController@countylc');
 // Advanced Search
 Route::get('/search', function () {
     return view('search');
@@ -36,14 +41,20 @@ Route::get('/proposal/{proposal}/decline', 'ProposalController@destroy');
 //Admin - List all the partners on the website and remove them.
 Route::get('partner/list', 'PartnerController@index');
 
-Route::get('/partners/{partner}/remove', 'PartnerController@remove');
+Route::get('/proposal/{partner}/remove', 'PartnerController@remove');
+
+Route::get('/facilityadd', 'HotelsController@indexfacility');
+
+Route::post('/{admin}/facilityadd', 'HotelsController@storefacility');
+
+Route::get('destroy/{Facility}','HotelsController@destroyfac');
 
 // Users - Make Partner Proposal and View Proposal status
 
 Route::get('partner/apply', 'ProposalController@index');
 Route::get('partner/{user}/status', 'ProposalController@status');
 Route::post('/proposal/{user}/new', 'ProposalController@store');
-Route::get('/profile', 'ProposalController@profile');
+Route::get('/profile', 'HomeController@profile');
 //Partner - View a Hotels Reservations and Add a New Hotel.
 
 Route::get('partners/{partner}/newhotel', 'PartnerController@addHotel');
@@ -55,6 +66,7 @@ Route::post('hotels/{partner}/add', 'HotelsController@store');
 // Search for Hotels and Select a Hotel.
 
 Route::post('/search', 'HotelsController@index');
+
 
 Route::get('/guestsearch', 'HotelsController@guestview');
 
@@ -117,3 +129,5 @@ Route::get('/reservations/{reservation}/pdf', 'ReservationController@pdfview');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+Route::get('/', 'HotelsController@showallhotel');
+

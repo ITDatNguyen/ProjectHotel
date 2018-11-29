@@ -85,5 +85,24 @@ class HomeController extends Controller
         return back();
 
     }
-
+    public function profile()
+    {
+        if (Auth::check()) {
+            $UserId = Auth::id();
+            $User = User::find($UserId);
+            if ($User->role->id == 2);
+            {
+                if ($User->proposals) {
+                    $proposal = $User->proposals;
+                    return view('profile', compact('proposal'));
+                }
+                else
+                {
+                    return view('profileproposal');
+                }
+            }
+        } else {
+            return redirect('/login');
+        }
+    }
 }

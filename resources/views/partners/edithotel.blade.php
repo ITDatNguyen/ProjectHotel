@@ -29,28 +29,31 @@
     </div>
 
     <div class="form-group">
-      <label for="Countybox" class="col-2 col-form-label">Địa chỉ:</label>
-      <div class="col-10">
-
-        <input class="form-control" name="County" type="text" value="{{$hotel->County}}" id="Countybox">
-      </div>
+      <label for="Countybox" class="col-2 col-form-label">Quận :</label>
+    <div class="col-8">
+        {{Form::select('County',$array,$quancam,array('class' => 'form-control'))}}
     </div>
-
-    <div class="form-group">
-      <label for="Citybox" class="col-2 col-form-label">Thành phố:</label>
-      <div class="col-10">
-
-        <input class="form-control" name="City" type="text" value="{{$hotel->City}}" id="Citybox">
+  </div>
+  <div class="row" style="margin-left:5px;">
+      <div class="form-group">
+          <label for="Facilitybox" class="col-2 col-form-label">Tiện ích hiện có:</label>
+        <div class="row">
+          @foreach ( $fas as $key => $fa )
+            <span style="padding-left: 15px;"><input name="namet[]" type="checkbox" value="{{$fa->id}}" checked=""  readonly=""> {{$fa->name }}</span>
+          @endforeach 
+        </div>
       </div>
-    </div>
-
-    <div class="form-group">
-      <label for="Countrybox" class="col-2 col-form-label">Quốc gia:</label>
-      <div class="col-10">
-
-        <input class="form-control" name="Country" type="text" value="{{$hotel->Country}}" id="Countrybox">
+  </div>
+  <div class="row" style="margin-left:5px;">
+      <div class="form-group">
+          <label for="Facilitybox" class="col-2 col-form-label">Tiện ích :</label>
+        <div class="row">
+          @foreach ( $facilities as $key => $fa )
+            <span  style="padding-left: 15px;"><input  name="names[]" type="checkbox" value="{{$fa->id }}"> {{$fa->name }}</span>
+          @endforeach 
+        </div>
       </div>
-    </div>
+  </div>
 
     <div class="form-group">
       <label for="Telbox" class="col-2 col-form-label">Số điện thoại:</label>
